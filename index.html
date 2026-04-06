@@ -601,7 +601,7 @@ tr:hover td{background:var(--g50)}
             <span class="login-link" onclick="showForgot()">Forgot password?</span>
           </div>
           <div class="demo-hint">
-            Demo: <strong>doctor@carecore.health</strong> / <strong>CareCore@2026</strong>
+            Demo: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b2f24283f24390b282a392e2824392e65232e2a273f23">[email&#160;protected]</a></strong> / <strong>CareCore@2026</strong>
           </div>
         </div>
         <!-- Signup form -->
@@ -874,7 +874,7 @@ tr:hover td{background:var(--g50)}
 
 <div id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ===== LOCAL AUTH =====
 const DEMO_USERS=[
   {email:'doctor@carecore.health',password:'CareCore@2026',name:'Dr. Priya Nair',role:'doctor'},
@@ -1065,13 +1065,179 @@ async function doSignup(){
   if(!result.ok){err.style.display='block';err.textContent=result.error;}
   else{suc.style.display='block';suc.textContent='✅ Account created! Signing you in…';setTimeout(()=>{document.getElementById('lemail').value=email;document.getElementById('lpass').value=pass;showLogin();doLogin();},1200);}
 }
+// ===== PASSWORD RESET (Resend API) =====
+const RESEND_API_KEY = 're_LFerD9wA_BaxYVTvKSpwPhHdwg4BQrrxs';
+
+function generateResetToken(){
+  return Array.from(crypto.getRandomValues(new Uint8Array(24)))
+    .map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function saveResetToken(email,token){
+  const expiry=Date.now()+(60*60*1000); // 1 hour
+  try{localStorage.setItem('cc_reset_'+email,JSON.stringify({token,expiry}));}catch(e){}
+}
+function getResetToken(email){
+  try{
+    const d=JSON.parse(localStorage.getItem('cc_reset_'+email)||'null');
+    if(!d)return null;
+    if(Date.now()>d.expiry){localStorage.removeItem('cc_reset_'+email);return null;}
+    return d.token;
+  }catch(e){return null;}
+}
+function clearResetToken(email){
+  try{localStorage.removeItem('cc_reset_'+email);}catch(e){}
+}
+
 async function doForgot(){
   const email=document.getElementById('femail').value.trim();
-  const err=document.getElementById('ferr');const suc=document.getElementById('fsuc');
+  const err=document.getElementById('ferr');
+  const suc=document.getElementById('fsuc');
+  const btn=document.querySelector('#fform .login-btn');
   err.style.display='none';suc.style.display='none';
-  if(!email){err.style.display='block';err.textContent='Please enter your email.';return;}
-  await new Promise(r=>setTimeout(r,600));
-  suc.style.display='block';suc.textContent='✅ If this email is registered, a reset link has been sent.';
+  if(!email){err.style.display='block';err.textContent='Please enter your email address.';return;}
+  // Check if email exists
+  const allUsers=[...DEMO_USERS,...getLocalUsers()];
+  const userExists=allUsers.some(u=>u.email===email);
+  if(!userExists){
+    // Security: don't reveal if email exists or not
+    suc.style.display='block';
+    suc.textContent='✅ If this email is registered, a reset link has been sent.';
+    return;
+  }
+  btn.disabled=true;btn.innerHTML='<span>Sending…</span>';
+  const token=generateResetToken();
+  saveResetToken(email,token);
+  // Build reset link — works on GitHub Pages or locally
+  const baseUrl=window.location.href.split('?')[0].split('#')[0];
+  const resetUrl=baseUrl+'?reset='+token+'&email='+encodeURIComponent(email);
+  try{
+    const resp=await fetch('https://api.resend.com/emails',{
+      method:'POST',
+      headers:{
+        'Authorization':'Bearer '+RESEND_API_KEY,
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        from:'CareCore <onboarding@resend.dev>',
+        to:[email],
+        subject:'Reset your CareCore password',
+        html:`
+          <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px 24px">
+            <div style="text-align:center;margin-bottom:24px">
+              <div style="font-size:48px">🏥</div>
+              <h1 style="font-size:24px;font-weight:900;color:#00574B;margin:8px 0">CareCore</h1>
+              <p style="color:#6B7F8E;font-size:14px;margin:0">Senior Living Health Platform</p>
+            </div>
+            <div style="background:#F0FBF9;border-radius:16px;padding:24px;margin-bottom:24px">
+              <h2 style="font-size:18px;font-weight:800;color:#1A2830;margin:0 0 12px">Reset your password</h2>
+              <p style="color:#4A5C6A;font-size:14px;line-height:1.6;margin:0 0 20px">
+                We received a request to reset the password for your CareCore account.
+                Click the button below to set a new password. This link expires in <strong>1 hour</strong>.
+              </p>
+              <a href="${resetUrl}" style="display:block;text-align:center;background:linear-gradient(135deg,#00574B,#00897B);color:#fff;text-decoration:none;padding:14px 24px;border-radius:12px;font-size:15px;font-weight:800;">
+                Reset My Password →
+              </a>
+            </div>
+            <p style="color:#9AAAB8;font-size:12px;text-align:center;margin:0">
+              If you didn't request this, you can safely ignore this email.<br/>
+              Your password will not be changed.
+            </p>
+          </div>
+        `
+      })
+    });
+    const data=await resp.json();
+    if(resp.ok){
+      suc.style.display='block';
+      suc.textContent='✅ Reset link sent! Check your inbox (and spam folder).';
+    } else {
+      err.style.display='block';
+      err.textContent='Failed to send email: '+(data.message||'Unknown error');
+    }
+  } catch(e){
+    err.style.display='block';
+    err.textContent='Network error. Please try again.';
+  }
+  btn.disabled=false;btn.innerHTML='<span>Send Reset Link</span><span>→</span>';
+}
+
+// ===== HANDLE RESET LINK (runs on page load) =====
+function checkResetLink(){
+  const params=new URLSearchParams(window.location.search);
+  const token=params.get('reset');
+  const email=decodeURIComponent(params.get('email')||'');
+  if(!token||!email) return;
+  const saved=getResetToken(email);
+  if(!saved||saved!==token){
+    // Show error — invalid or expired link
+    setTimeout(()=>{
+      showForgot();
+      document.getElementById('ferr').style.display='block';
+      document.getElementById('ferr').textContent='This reset link has expired or is invalid. Please request a new one.';
+    },300);
+    return;
+  }
+  // Valid token — show new password form
+  setTimeout(()=>showNewPasswordForm(email,token),300);
+}
+
+function showNewPasswordForm(email,token){
+  document.getElementById('lform').style.display='none';
+  document.getElementById('sform').style.display='none';
+  document.getElementById('fform').style.display='none';
+  document.getElementById('role-grid').style.display='none';
+  document.getElementById('login-title').textContent='Set new password';
+  // Build the new password form dynamically
+  const card=document.querySelector('.login-card');
+  let npForm=document.getElementById('npform');
+  if(!npForm){
+    npForm=document.createElement('div');
+    npForm.id='npform';
+    card.appendChild(npForm);
+  }
+  npForm.innerHTML=`
+    <div id="nperr" class="err-box"></div>
+    <div id="npsuc" class="suc-box"></div>
+    <p style="font-size:13px;color:var(--g500);margin-bottom:14px">Enter a new password for <strong>${email}</strong></p>
+    <div class="field"><label>New Password</label><input id="np-pass" type="password" placeholder="Min 8 characters"/></div>
+    <div class="field"><label>Confirm Password</label><input id="np-pass2" type="password" placeholder="Re-enter new password" onkeydown="if(event.key==='Enter')doNewPassword('${email}','${token}')"/></div>
+    <button class="login-btn" onclick="doNewPassword('${email}','${token}')"><span>Set New Password</span><span>→</span></button>
+    <div class="login-links" style="justify-content:center;margin-top:12px">
+      <span class="login-link" onclick="showLogin();document.getElementById('npform').remove()">← Back to Sign In</span>
+    </div>
+  `;
+  npForm.style.display='';
+}
+
+async function doNewPassword(email,token){
+  const pass=document.getElementById('np-pass').value;
+  const pass2=document.getElementById('np-pass2').value;
+  const err=document.getElementById('nperr');
+  const suc=document.getElementById('npsuc');
+  err.style.display='none';suc.style.display='none';
+  if(!pass||!pass2){err.style.display='block';err.textContent='Please fill in both fields.';return;}
+  if(pass.length<8){err.style.display='block';err.textContent='Password must be at least 8 characters.';return;}
+  if(pass!==pass2){err.style.display='block';err.textContent='Passwords do not match.';return;}
+  // Verify token still valid
+  const saved=getResetToken(email);
+  if(!saved||saved!==token){err.style.display='block';err.textContent='Reset link expired. Please request a new one.';return;}
+  // Update password in localStorage
+  const users=getLocalUsers();
+  const idx=users.findIndex(u=>u.email===email);
+  if(idx>-1){users[idx].password=pass;users[idx].pass=pass;saveLocalUsers(users);}
+  // Also update demo users in memory (session only)
+  const di=DEMO_USERS.findIndex(u=>u.email===email);
+  if(di>-1)DEMO_USERS[di].password=pass;
+  clearResetToken(email);
+  // Clean URL
+  window.history.replaceState({},'',window.location.pathname);
+  suc.style.display='block';suc.textContent='✅ Password updated! Signing you in…';
+  await new Promise(r=>setTimeout(r,1200));
+  document.getElementById('npform').remove();
+  document.getElementById('lemail').value=email;
+  document.getElementById('lpass').value=pass;
+  showLogin();
+  doLogin();
 }
 function doLogout(){
   CURRENT_USER=null;
@@ -1616,12 +1782,11 @@ function loadAudit(){
   </tr>`).join('');
 }
 
-// ===== SEARCH =====
-function globalSearch(q){
-  if(!q.trim())return;
-  const match=RESIDENTS.find(r=>r.name.toLowerCase().includes(q.toLowerCase()));
-  if(match){nav('residents');setTimeout(()=>viewRes(match.id),100);}
-}
+// ===== SEARCH 
+// ===== BOOT =====
+window.addEventListener('DOMContentLoaded', function() {
+  checkResetLink();
+});
 </script>
 </body>
 </html>
