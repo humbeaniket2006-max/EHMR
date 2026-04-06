@@ -2,825 +2,926 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-<title>CareCore EHMR</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CareCore — Senior Living Health Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --teal:#00897B;--teal-d:#00695C;--teal-l:#E0F2F1;--teal-xl:#F0FBF9;
-  --coral:#FF6B6B;--amber:#FFB300;--sky:#0288D1;--violet:#7B1FA2;
-  --green:#2E7D32;--green-l:#E8F5E9;
-  --white:#FFFFFF;--bg:#F4F7F9;--surface:#FFFFFF;
-  --gray50:#FAFBFC;--gray100:#F1F4F7;--gray200:#E2E8ED;--gray300:#C8D3DC;
-  --gray400:#9AAAB8;--gray500:#6B7F8E;--gray600:#4A5C6A;--gray700:#2D3F4C;--gray800:#1A2830;
-  --shadow-xs:0 1px 3px rgba(0,0,0,0.06);
-  --shadow-sm:0 2px 8px rgba(0,0,0,0.08);
-  --shadow-md:0 4px 16px rgba(0,0,0,0.10);
-  --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
-  --r4:4px;--r8:8px;--r12:12px;--r16:16px;--r20:20px;--r-full:999px;
-  --font:'DM Sans',system-ui,sans-serif;
-  --mono:'DM Mono',monospace;
+  --teal:#00897B;--teal-d:#00574B;--teal-l:#E0F2F1;--teal-xl:#F0FBF9;
+  --coral:#FF5252;--amber:#FFB300;--sky:#0288D1;--green:#2E7D32;--green-l:#E8F5E9;
+  --white:#FFFFFF;--bg:#F0F4F8;--surface:#FFFFFF;
+  --g50:#FAFBFC;--g100:#F1F4F7;--g200:#E2E8ED;--g300:#C8D3DC;
+  --g400:#9AAAB8;--g500:#6B7F8E;--g600:#4A5C6A;--g700:#2D3F4C;--g800:#1A2830;
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.07);
+  --shadow-md:0 4px 20px rgba(0,0,0,0.10);
+  --shadow-lg:0 8px 40px rgba(0,0,0,0.13);
+  --r:12px;--font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
 }
-html,body{height:100%;overflow:hidden}
-body{font-family:var(--font);background:var(--bg);color:var(--gray800);font-size:14px;line-height:1.5}
+html,body{height:100%;overflow:hidden;font-family:var(--font);background:var(--bg);color:var(--g800);font-size:14px;line-height:1.5}
 
-/* ═══ LOGIN ═══════════════════════════════════════════════════ */
+/* ===== LOGIN ===== */
 #login-screen{
   position:fixed;inset:0;z-index:9999;
-  background:linear-gradient(145deg,#00574B 0%,#00897B 40%,#00ACC1 100%);
+  background:linear-gradient(135deg,#003D35 0%,#00574B 30%,#00897B 65%,#00BCD4 100%);
   display:flex;align-items:center;justify-content:center;padding:20px;
   overflow-y:auto;
 }
-.login-wrap{width:100%;max-width:400px}
-.login-brand{text-align:center;margin-bottom:32px}
-.login-brand-icon{
-  width:72px;height:72px;border-radius:20px;
-  background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.25);
+.login-wrap{width:100%;max-width:420px}
+.login-brand{text-align:center;margin-bottom:28px}
+.brand-logo{
+  width:80px;height:80px;border-radius:24px;
+  background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);
+  border:1.5px solid rgba(255,255,255,0.25);
   display:flex;align-items:center;justify-content:center;
-  margin:0 auto 16px;font-size:32px;
+  margin:0 auto 16px;font-size:36px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.2);
 }
-.login-brand-name{font-size:28px;font-weight:800;color:#fff;letter-spacing:-0.5px}
-.login-brand-sub{font-size:13px;color:rgba(255,255,255,0.65);margin-top:4px}
+.brand-name{font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px}
+.brand-sub{font-size:13px;color:rgba(255,255,255,0.6);margin-top:4px;letter-spacing:0.3px}
 .login-card{
   background:#fff;border-radius:24px;padding:28px 24px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.25);
+  box-shadow:0 24px 64px rgba(0,0,0,0.25);
 }
-.login-card-title{font-size:17px;font-weight:700;color:var(--gray800);margin-bottom:20px;text-align:center}
-.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.card-title-sm{font-size:16px;font-weight:800;color:var(--g800);margin-bottom:18px;text-align:center}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
 .role-card{
-  border:2px solid var(--gray200);border-radius:14px;padding:14px 10px;
-  text-align:center;cursor:pointer;transition:all .18s;
-  background:var(--gray50);
+  border:2px solid var(--g200);border-radius:14px;padding:14px 10px;
+  text-align:center;cursor:pointer;transition:all .18s;background:var(--g50);
 }
-.role-card:active{transform:scale(0.97)}
-.role-card.selected{border-color:var(--teal);background:var(--teal-xl);box-shadow:0 0 0 4px rgba(0,137,123,0.12)}
-.role-card-icon{font-size:26px;display:block;margin-bottom:6px}
-.role-card-label{font-size:12px;font-weight:700;color:var(--gray700)}
-.role-card-desc{font-size:10px;color:var(--gray400);margin-top:2px;line-height:1.3}
-.role-card.selected .role-card-label{color:var(--teal-d)}
-.lfield{margin-bottom:14px}
-.lfield label{display:block;font-size:12px;font-weight:600;color:var(--gray600);margin-bottom:6px}
-.lfield input{
-  width:100%;padding:12px 14px;border:2px solid var(--gray200);border-radius:12px;
-  font-size:15px;font-family:var(--font);color:var(--gray800);background:#fff;outline:none;
+.role-card:hover{border-color:var(--teal-l);background:var(--teal-xl)}
+.role-card.selected{border-color:var(--teal);background:var(--teal-xl);box-shadow:0 0 0 3px rgba(0,137,123,0.15)}
+.role-icon{font-size:24px;display:block;margin-bottom:5px}
+.role-lbl{font-size:12px;font-weight:800;color:var(--g700)}
+.role-desc{font-size:10px;color:var(--g400);margin-top:2px;line-height:1.3}
+.role-card.selected .role-lbl{color:var(--teal-d)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--g600);margin-bottom:6px;letter-spacing:0.3px;text-transform:uppercase}
+.field input,.field select{
+  width:100%;padding:12px 14px;border:2px solid var(--g200);border-radius:10px;
+  font-size:15px;font-family:var(--font);color:var(--g800);background:#fff;outline:none;
   transition:border-color .15s;
 }
-.lfield input:focus{border-color:var(--teal)}
-.login-error{
-  background:#FFF0F0;border:1px solid #FFCDD2;border-radius:10px;
-  padding:10px 14px;font-size:13px;color:#C62828;font-weight:500;margin-bottom:14px;display:none;
+.field input:focus,.field select:focus{border-color:var(--teal)}
+.err-box{
+  background:#FFF5F5;border:1.5px solid #FFCDD2;border-radius:10px;
+  padding:10px 14px;font-size:13px;color:#C62828;font-weight:600;
+  margin-bottom:14px;display:none;
+}
+.suc-box{
+  background:#E8F5E9;border:1.5px solid #A5D6A7;border-radius:10px;
+  padding:10px 14px;font-size:13px;color:#2E7D32;font-weight:600;
+  margin-bottom:14px;display:none;
 }
 .login-btn{
-  width:100%;padding:14px;background:var(--teal-d);color:#fff;border:none;
-  border-radius:12px;font-size:15px;font-weight:700;font-family:var(--font);
-  cursor:pointer;transition:background .15s;margin-top:4px;
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--teal-d),var(--teal));
+  color:#fff;border:none;border-radius:12px;
+  font-size:15px;font-weight:800;font-family:var(--font);
+  cursor:pointer;transition:all .15s;margin-top:4px;
   display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 4px 16px rgba(0,87,75,0.35);
 }
-.login-btn:active{background:var(--teal)}
-.login-demo{margin-top:16px;text-align:center;font-size:11px;color:var(--gray400)}
-.login-demo strong{color:var(--gray500)}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,87,75,0.4)}
+.login-btn:active{transform:translateY(0)}
+.login-btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
+.login-links{margin-top:16px;display:flex;justify-content:space-between;align-items:center}
+.login-link{font-size:12px;font-weight:700;color:var(--teal-d);cursor:pointer;text-decoration:none}
+.login-link:hover{text-decoration:underline}
+.demo-hint{margin-top:14px;text-align:center;font-size:11px;color:var(--g400);padding:10px;background:var(--g50);border-radius:10px;border:1px solid var(--g200)}
+.demo-hint strong{color:var(--g600);font-family:var(--mono);font-size:10px}
 
-/* ═══ APP SHELL ════════════════════════════════════════════════ */
-#app{display:none;height:100vh;overflow:hidden;flex-direction:column}
+/* ===== APP SHELL ===== */
+#app{display:none;height:100vh;flex-direction:column}
 #app.visible{display:flex}
+.app-body{display:flex;flex:1;overflow:hidden}
 
-/* ─── TOP BAR ─── */
-.topbar{
-  height:56px;background:var(--teal-d);
-  display:flex;align-items:center;gap:0;flex-shrink:0;
-  padding:0 4px;position:relative;z-index:100;
-  box-shadow:0 2px 8px rgba(0,0,0,0.18);
-}
-.tb-menu-btn{
-  width:48px;height:48px;display:flex;align-items:center;justify-content:center;
-  background:none;border:none;cursor:pointer;border-radius:12px;flex-shrink:0;
-}
-.tb-menu-btn:active{background:rgba(255,255,255,0.1)}
-.tb-hamburger{display:flex;flex-direction:column;gap:5px}
-.tb-hamburger span{display:block;width:20px;height:2px;background:rgba(255,255,255,0.9);border-radius:2px}
-.tb-center{flex:1;text-align:center}
-.tb-title{font-size:16px;font-weight:800;color:#fff;letter-spacing:-0.3px}
-.tb-sub{font-size:10px;color:rgba(255,255,255,0.6);margin-top:1px;letter-spacing:0.2px}
-.tb-user-btn{
-  width:48px;height:48px;display:flex;align-items:center;justify-content:center;
-  background:none;border:none;cursor:pointer;flex-shrink:0;position:relative;
-}
-.tb-avatar{
-  width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:#fff;border:2px solid rgba(255,255,255,0.4);
-  background:var(--teal);letter-spacing:0;
-}
-
-/* ─── USER DROPDOWN ─── */
-.user-dropdown{
-  position:absolute;top:56px;right:8px;width:220px;
-  background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);
-  overflow:hidden;z-index:500;display:none;
-  border:1px solid var(--gray200);
-}
-.user-dropdown.open{display:block;animation:dropIn .15s ease}
-@keyframes dropIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-.ud-header{padding:16px;background:var(--teal-xl);border-bottom:1px solid var(--teal-l)}
-.ud-name{font-size:14px;font-weight:700;color:var(--gray800)}
-.ud-role-tag{font-size:11px;color:var(--teal-d);font-weight:600;margin-top:2px}
-.ud-item{
-  display:flex;align-items:center;gap:12px;padding:13px 16px;
-  cursor:pointer;font-size:13px;font-weight:500;color:var(--gray700);
-  border-bottom:1px solid var(--gray100);transition:background .12s;
-}
-.ud-item:last-child{border-bottom:none}
-.ud-item:active{background:var(--gray100)}
-.ud-item-icon{font-size:17px;flex-shrink:0}
-.ud-item.danger{color:#C62828}
-
-/* ─── SIDEBAR OVERLAY ─── */
-.sidebar-overlay{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;
-  backdrop-filter:blur(2px);
-}
-.sidebar-overlay.open{display:block}
-
-/* ─── SIDEBAR ─── */
+/* ===== SIDEBAR ===== */
 .sidebar{
-  position:fixed;top:0;left:0;bottom:0;width:272px;
-  background:var(--teal-d);z-index:300;
-  display:flex;flex-direction:column;
-  transform:translateX(-100%);transition:transform .25s ease;
-  box-shadow:4px 0 24px rgba(0,0,0,0.2);
+  width:240px;flex-shrink:0;background:var(--teal-d);
+  display:flex;flex-direction:column;overflow:hidden;
+  transition:width .25s ease;
+  box-shadow:4px 0 20px rgba(0,0,0,0.15);
 }
-.sidebar.open{transform:translateX(0)}
+.sidebar.collapsed{width:60px}
 .sb-header{
-  padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,0.1);
-  display:flex;align-items:center;gap:12px;
+  padding:16px 12px;border-bottom:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
 }
-.sb-logo-icon{
-  width:40px;height:40px;border-radius:12px;
+.sb-logo{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
   background:rgba(255,255,255,0.15);
-  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
 }
-.sb-logo-name{font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.3px}
-.sb-logo-ver{font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px}
-.sb-close{
-  margin-left:auto;width:32px;height:32px;border-radius:8px;
-  background:rgba(255,255,255,0.1);border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);font-size:18px;
+.sb-brand{flex:1;overflow:hidden;transition:opacity .2s}
+.sidebar.collapsed .sb-brand{opacity:0;width:0}
+.sb-brand-name{font-size:16px;font-weight:900;color:#fff;letter-spacing:-0.5px;white-space:nowrap}
+.sb-brand-ver{font-size:10px;color:rgba(255,255,255,0.4);white-space:nowrap}
+.sb-collapse-btn{
+  width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.1);
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.7);font-size:14px;flex-shrink:0;transition:background .15s;
 }
-.sb-user{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.sb-collapse-btn:hover{background:rgba(255,255,255,0.2)}
+.sb-user{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.08)}
 .sb-user-card{
-  display:flex;align-items:center;gap:10px;padding:10px 12px;
-  background:rgba(255,255,255,0.08);border-radius:12px;
+  display:flex;align-items:center;gap:9px;padding:9px 10px;
+  background:rgba(255,255,255,0.08);border-radius:10px;
+  transition:background .15s;cursor:pointer;
 }
-.sb-user-av{
-  width:38px;height:38px;border-radius:50%;
+.sb-user-card:hover{background:rgba(255,255,255,0.14)}
+.sb-av{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:700;color:#fff;flex-shrink:0;
+  font-size:12px;font-weight:800;color:#fff;
 }
-.sb-user-name{font-size:13px;font-weight:700;color:#fff}
-.sb-user-role{font-size:10px;color:rgba(255,255,255,0.55);margin-top:1px}
-.sb-nav{flex:1;overflow-y:auto;padding:10px 8px}
+.sb-uname{font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-urole{font-size:10px;color:rgba(255,255,255,0.5);white-space:nowrap}
+.sb-nav{flex:1;overflow-y:auto;padding:8px;scrollbar-width:none}
 .sb-nav::-webkit-scrollbar{display:none}
-.sb-section{font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;padding:12px 10px 5px}
+.sb-section{
+  font-size:9px;font-weight:700;color:rgba(255,255,255,0.3);
+  text-transform:uppercase;letter-spacing:1.5px;
+  padding:12px 10px 4px;white-space:nowrap;overflow:hidden;
+  transition:opacity .2s;
+}
+.sidebar.collapsed .sb-section{opacity:0}
 .sb-item{
-  display:flex;align-items:center;gap:12px;padding:12px 12px;
-  border-radius:12px;cursor:pointer;margin-bottom:2px;
-  color:rgba(255,255,255,0.7);font-size:13px;font-weight:500;
-  transition:all .15s;position:relative;
+  display:flex;align-items:center;gap:11px;padding:10px 11px;
+  border-radius:10px;cursor:pointer;margin-bottom:1px;
+  color:rgba(255,255,255,0.65);font-size:13px;font-weight:500;
+  transition:all .15s;position:relative;overflow:hidden;
+  white-space:nowrap;
 }
-.sb-item:active{background:rgba(255,255,255,0.12)}
-.sb-item.active{background:rgba(255,255,255,0.15);color:#fff;font-weight:700}
-.sb-item.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:#5DCAA5;border-radius:0 3px 3px 0}
-.sb-item-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center}
+.sb-item:hover{background:rgba(255,255,255,0.1);color:#fff}
+.sb-item.active{background:rgba(255,255,255,0.16);color:#fff;font-weight:700}
+.sb-item.active::before{
+  content:'';position:absolute;left:0;top:6px;bottom:6px;
+  width:3px;background:#5DCAA5;border-radius:0 3px 3px 0;
+}
+.sb-item-ico{font-size:17px;flex-shrink:0;width:22px;text-align:center}
+.sb-item-txt{flex:1;overflow:hidden;text-overflow:ellipsis;transition:opacity .2s}
+.sidebar.collapsed .sb-item-txt{opacity:0}
 .sb-badge{
-  margin-left:auto;background:var(--coral);color:#fff;
-  border-radius:var(--r-full);padding:2px 8px;font-size:10px;font-weight:700;
+  background:var(--coral);color:#fff;border-radius:20px;
+  padding:2px 7px;font-size:9px;font-weight:800;flex-shrink:0;
+  transition:opacity .2s;
 }
-.sb-footer{padding:12px 8px;border-top:1px solid rgba(255,255,255,0.08)}
+.sidebar.collapsed .sb-badge{opacity:0}
+.sb-footer{padding:8px;border-top:1px solid rgba(255,255,255,0.08)}
 .sb-logout{
-  display:flex;align-items:center;gap:10px;padding:11px 12px;
-  border-radius:12px;cursor:pointer;color:rgba(255,255,255,0.6);
+  display:flex;align-items:center;gap:10px;padding:10px 11px;
+  border-radius:10px;cursor:pointer;color:rgba(255,255,255,0.55);
   font-size:13px;font-weight:500;transition:all .15s;
 }
-.sb-logout:active{background:rgba(255,100,100,0.15);color:#FF8A80}
+.sb-logout:hover{background:rgba(255,82,82,0.2);color:#FF8A80}
 
-/* ─── MAIN CONTENT ─── */
-.main{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch}
-.main::-webkit-scrollbar{display:none}
-.content{padding:16px;max-width:100%;animation:fadeUp .25s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.page{display:none}.page.active{display:block}
+/* ===== TOPBAR ===== */
+.topbar{
+  height:56px;background:#fff;
+  border-bottom:1px solid var(--g200);
+  display:flex;align-items:center;gap:12px;
+  padding:0 20px 0 16px;flex-shrink:0;
+  box-shadow:var(--shadow-sm);z-index:10;
+}
+.tb-title{font-size:18px;font-weight:800;color:var(--g800);letter-spacing:-0.5px}
+.tb-sub{font-size:12px;color:var(--g400);margin-left:2px}
+.tb-spacer{flex:1}
+.tb-search{
+  display:flex;align-items:center;gap:8px;
+  background:var(--g100);border-radius:10px;padding:8px 14px;
+  border:2px solid transparent;transition:all .15s;
+}
+.tb-search:focus-within{background:#fff;border-color:var(--teal)}
+.tb-search input{
+  border:none;outline:none;background:transparent;
+  font-family:var(--font);font-size:13px;color:var(--g700);width:180px;
+}
+.tb-search-ico{font-size:14px;color:var(--g400)}
+.tb-btn{
+  width:38px;height:38px;border-radius:10px;background:var(--g100);
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:16px;transition:all .15s;position:relative;color:var(--g600);
+}
+.tb-btn:hover{background:var(--g200)}
+.tb-alert-dot{
+  position:absolute;top:5px;right:5px;
+  width:8px;height:8px;border-radius:50%;background:var(--coral);
+  border:2px solid #fff;
+}
+.tb-avatar{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:#fff;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);transition:transform .15s;
+}
+.tb-avatar:hover{transform:scale(1.05)}
 
-/* ─── PAGE HEADER ─── */
-.page-header{margin-bottom:18px}
-.page-header-title{font-size:22px;font-weight:800;color:var(--gray800);letter-spacing:-0.4px}
-.page-header-sub{font-size:13px;color:var(--gray400);margin-top:3px}
+/* ===== MAIN CONTENT ===== */
+.main{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--g200) transparent}
+.main::-webkit-scrollbar{width:4px}
+.main::-webkit-scrollbar-track{background:transparent}
+.main::-webkit-scrollbar-thumb{background:var(--g200);border-radius:4px}
+.page{display:none;padding:24px;min-height:100%}
+.page.active{display:block}
+.page-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.page-title{font-size:22px;font-weight:900;color:var(--g800);letter-spacing:-0.5px}
+.page-sub{font-size:13px;color:var(--g500);margin-top:2px}
 
-/* ─── CARDS ─── */
-.card{background:var(--surface);border-radius:var(--r16);padding:18px;box-shadow:var(--shadow-sm);margin-bottom:14px;border:1px solid rgba(0,0,0,0.04)}
-.card-title{font-size:12px;font-weight:700;color:var(--gray500);text-transform:uppercase;letter-spacing:.7px;margin-bottom:14px}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.card-header .card-title{margin-bottom:0}
+/* ===== CARDS ===== */
+.card{
+  background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;
+  box-shadow:var(--shadow-sm);border:1px solid var(--g100);
+}
+.card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.card-ttl{font-size:14px;font-weight:800;color:var(--g700);display:flex;align-items:center;gap:6px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 
-/* ─── STAT CARDS ─── */
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.stat-card{background:var(--surface);border-radius:var(--r16);padding:16px;box-shadow:var(--shadow-xs);border:1px solid rgba(0,0,0,0.04)}
-.stat-icon{font-size:22px;margin-bottom:8px}
-.stat-val{font-size:28px;font-weight:800;letter-spacing:-0.5px;line-height:1}
-.stat-lbl{font-size:11px;font-weight:600;color:var(--gray500);text-transform:uppercase;letter-spacing:.4px;margin-top:5px}
-.stat-sub{font-size:11px;color:var(--gray400);margin-top:3px}
+/* ===== STAT CARDS ===== */
+.stat-card{
+  background:#fff;border-radius:16px;padding:18px;
+  box-shadow:var(--shadow-sm);border:1px solid var(--g100);
+  transition:transform .15s,box-shadow .15s;cursor:default;
+}
+.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.stat-ico{font-size:28px;margin-bottom:10px;display:block}
+.stat-val{font-size:28px;font-weight:900;letter-spacing:-1px;line-height:1}
+.stat-lbl{font-size:12px;font-weight:700;color:var(--g600);margin-top:6px}
+.stat-sub{font-size:11px;color:var(--g400);margin-top:3px}
 
-/* ─── RESIDENT ROWS ─── */
+/* ===== BUTTONS ===== */
+.btn{
+  padding:9px 16px;border-radius:10px;border:none;cursor:pointer;
+  font-family:var(--font);font-size:13px;font-weight:700;
+  transition:all .15s;display:inline-flex;align-items:center;gap:6px;
+}
+.btn-primary{background:var(--teal-d);color:#fff;box-shadow:0 2px 8px rgba(0,87,75,0.3)}
+.btn-primary:hover{background:var(--teal);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--teal-d);border:2px solid var(--teal-l)}
+.btn-outline:hover{background:var(--teal-xl);border-color:var(--teal)}
+.btn-danger{background:#FFF5F5;color:var(--coral);border:2px solid #FFCDD2}
+.btn-danger:hover{background:#FFEBEE}
+.btn-sm{padding:7px 12px;font-size:12px;border-radius:8px}
+
+/* ===== BADGES ===== */
+.badge{
+  display:inline-block;padding:3px 9px;border-radius:20px;
+  font-size:10px;font-weight:800;letter-spacing:0.3px;
+}
+.badge-stable{background:#E8F5E9;color:#2E7D32}
+.badge-monitor{background:#FFF8E1;color:#F57F17}
+.badge-critical{background:#FFEBEE;color:#C62828}
+.badge-recovery{background:#E3F2FD;color:#1565C0}
+.badge-teal{background:var(--teal-xl);color:var(--teal-d)}
+.badge-gray{background:var(--g100);color:var(--g600)}
+
+/* ===== ALERTS ===== */
+.alert-row{
+  display:flex;align-items:flex-start;gap:12px;padding:12px;
+  border-radius:12px;margin-bottom:8px;
+}
+.alert-critical{background:#FFF5F5;border:1.5px solid #FFCDD2}
+.alert-warning{background:#FFF8E1;border:1.5px solid #FFECB3}
+.alert-info{background:var(--teal-xl);border:1.5px solid var(--teal-l)}
+.alert-ico{font-size:20px;flex-shrink:0;margin-top:1px}
+.alert-body{flex:1}
+.alert-title{font-size:13px;font-weight:800;color:var(--g800)}
+.alert-msg{font-size:12px;color:var(--g600);margin-top:2px}
+.alert-time{font-size:10px;color:var(--g400);margin-top:3px;font-family:var(--mono)}
+.ack-btn{
+  padding:5px 12px;background:var(--g700);color:#fff;
+  border:none;border-radius:8px;font-size:11px;font-weight:800;
+  cursor:pointer;flex-shrink:0;transition:background .15s;white-space:nowrap;
+}
+.ack-btn:hover{background:var(--g800)}
+
+/* ===== RESIDENT LIST ===== */
 .r-row{
   display:flex;align-items:center;gap:12px;padding:13px 0;
-  border-bottom:1px solid var(--gray100);cursor:pointer;
+  border-bottom:1px solid var(--g100);cursor:pointer;transition:background .12s;
+  border-radius:8px;padding-left:4px;padding-right:4px;
 }
 .r-row:last-child{border-bottom:none}
-.r-row:active .r-name{color:var(--teal)}
+.r-row:hover{background:var(--g50)}
 .r-av{
-  width:44px;height:44px;border-radius:var(--r12);flex-shrink:0;
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:800;color:#fff;
+  font-size:13px;font-weight:800;color:#fff;
 }
-.r-name{font-size:14px;font-weight:700;color:var(--gray800)}
-.r-meta{font-size:11px;color:var(--gray400);margin-top:2px}
-.r-chevron{color:var(--gray300);font-size:16px;margin-left:auto;flex-shrink:0}
+.r-name{font-size:14px;font-weight:800;color:var(--g800)}
+.r-meta{font-size:11px;color:var(--g400);margin-top:3px}
+.r-chevron{font-size:18px;color:var(--g300);margin-left:auto}
 
-/* ─── BADGES ─── */
-.badge{display:inline-flex;align-items:center;gap:4px;border-radius:var(--r-full);padding:3px 10px;font-size:11px;font-weight:700;white-space:nowrap}
-.badge-stable{background:#E8F5E9;color:#2E7D32}
-.badge-monitor{background:#FFF8E1;color:#E65100}
-.badge-recovery{background:#E3F2FD;color:#1565C0}
-.badge-critical{background:#FFEBEE;color:#B71C1C}
-.badge-given{background:#E8F5E9;color:#2E7D32}
-.badge-pending{background:#FFF8E1;color:#E65100}
-.badge-overdue{background:#FFEBEE;color:#B71C1C}
-.badge-high{background:#FFEBEE;color:#B71C1C}
-.badge-low{background:#E3F2FD;color:#1565C0}
-.badge-normal{background:#E8F5E9;color:#2E7D32}
-.badge-teal{background:var(--teal-l);color:var(--teal-d)}
-
-/* ─── ALERT ROWS ─── */
-.alert-row{display:flex;gap:12px;padding:13px 14px;border-radius:var(--r12);margin-bottom:8px;border-left:4px solid}
-.alert-critical{background:#FFF5F5;border-color:var(--coral)}
-.alert-warning{background:#FFFDF0;border-color:var(--amber)}
-.alert-info{background:#F0F9FF;border-color:var(--sky)}
-.alert-icon{font-size:20px;flex-shrink:0;padding-top:1px}
-.alert-body{flex:1}
-.alert-title{font-weight:700;font-size:13px;color:var(--gray800)}
-.alert-msg{font-size:12px;color:var(--gray600);margin-top:3px;line-height:1.5}
-.alert-time{font-size:11px;color:var(--gray400);margin-top:5px}
-.ack-btn{
-  background:var(--teal-d);color:#fff;border:none;border-radius:var(--r8);
-  padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;
-  align-self:flex-start;font-family:var(--font);transition:background .15s;
+/* ===== VITALS ===== */
+.vitals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px}
+.vital-box{
+  background:var(--g50);border-radius:12px;padding:12px;
+  border:1px solid var(--g100);text-align:center;
 }
-.ack-btn:active{background:var(--teal)}
-
-/* ─── VITALS GRID ─── */
-.vitals-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
-.vital-box{background:var(--gray50);border:1px solid var(--gray200);border-radius:var(--r12);padding:12px 8px;text-align:center}
-.vital-lbl{font-size:9px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:.5px}
-.vital-val{font-size:18px;font-weight:800;margin:5px 0 2px;line-height:1}
-.vital-unit{font-size:9px;color:var(--gray400)}
-.vital-ok{color:var(--green)}
+.vital-lbl{font-size:10px;font-weight:700;color:var(--g500);text-transform:uppercase;letter-spacing:0.5px}
+.vital-val{font-size:22px;font-weight:900;margin:4px 0;letter-spacing:-0.5px}
+.vital-unit{font-size:10px;color:var(--g400)}
+.vital-ok{color:var(--teal-d)}
 .vital-warn{color:var(--amber)}
 .vital-crit{color:var(--coral)}
 
-/* ─── BAR CHARTS ─── */
-.chart-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.chart-lbl{width:80px;font-size:11px;color:var(--gray500);text-align:right;flex-shrink:0;line-height:1.3}
-.bar-track{flex:1;background:var(--gray200);border-radius:var(--r-full);height:16px;overflow:hidden}
-.bar-fill{height:100%;border-radius:var(--r-full);transition:width .4s ease}
-.chart-val{width:40px;font-size:11px;font-weight:700;flex-shrink:0}
+/* ===== MEDS ===== */
+.med-row{padding:13px 0;border-bottom:1px solid var(--g100)}
+.med-row:last-child{border-bottom:none}
+.med-name{font-size:14px;font-weight:800;color:var(--g800)}
+.med-detail{font-size:11px;color:var(--g500);margin-top:2px}
+.med-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.dose-chip{
+  padding:5px 12px;border-radius:8px;font-size:11px;font-weight:700;
+  cursor:pointer;transition:all .15s;font-family:var(--mono);
+}
+.dose-chip.given{background:var(--green-l);color:var(--green);cursor:default}
+.dose-chip.pending{background:var(--teal-xl);color:var(--teal-d)}
+.dose-chip.pending:hover{background:var(--teal-l)}
+.dose-chip.overdue{background:#FFEBEE;color:var(--coral)}
 
-/* ─── TABLES ─── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r12);border:1px solid var(--gray200)}
-table{width:100%;border-collapse:collapse;font-size:12px;min-width:400px}
-th{padding:10px 12px;font-size:10px;font-weight:700;color:var(--gray500);text-transform:uppercase;letter-spacing:.5px;background:var(--gray50);text-align:left;border-bottom:2px solid var(--gray200)}
-td{padding:11px 12px;border-bottom:1px solid var(--gray100);vertical-align:middle;color:var(--gray700)}
-tr:last-child td{border-bottom:none}
-tr:active td{background:var(--gray50)}
+/* ===== LABS ===== */
+.lab-row{
+  display:flex;align-items:center;gap:10px;padding:11px 0;
+  border-bottom:1px solid var(--g100);flex-wrap:wrap;
+}
+.lab-row:last-child{border-bottom:none}
+.lab-test{font-size:13px;font-weight:700;color:var(--g700);min-width:130px}
+.lab-val{font-size:14px;font-weight:900;font-family:var(--mono)}
+.lab-ref{font-size:11px;color:var(--g400)}
 
-/* ─── FORMS ─── */
-.form-group{margin-bottom:13px}
-.form-group label{display:block;font-size:12px;font-weight:600;color:var(--gray600);margin-bottom:5px}
+/* ===== TIMELINE ===== */
+.tl-item{display:flex;gap:14px;margin-bottom:6px}
+.tl-left{display:flex;flex-direction:column;align-items:center;gap:0}
+.tl-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:8px}
+.tl-line{width:2px;flex:1;background:var(--g200);margin:4px 0;min-height:24px}
+.tl-card{flex:1;background:var(--g50);border:1px solid var(--g200);border-radius:12px;padding:12px;margin-bottom:8px}
+.tl-hdr{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px}
+.tl-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.tl-title{font-size:13px;font-weight:800;color:var(--g800)}
+.tl-time{font-size:10px;color:var(--g400);font-family:var(--mono);margin-top:2px}
+.tl-body{font-size:12px;color:var(--g600);line-height:1.5}
+
+/* ===== FORMS ===== */
+.form-section{
+  background:var(--teal-xl);border:1.5px solid var(--teal-l);
+  border-radius:14px;padding:18px;margin-bottom:14px;
+  display:none;
+}
+.form-section.open{display:block;animation:slideDown .2s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group{margin-bottom:0}
+.form-group label{display:block;font-size:11px;font-weight:700;color:var(--teal-d);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.3px}
 .form-group input,.form-group select,.form-group textarea{
-  width:100%;padding:11px 13px;border:2px solid var(--gray200);border-radius:var(--r12);
-  font-size:14px;font-family:var(--font);color:var(--gray800);background:#fff;outline:none;
+  width:100%;padding:10px 12px;border:1.5px solid var(--teal-l);border-radius:9px;
+  font-size:14px;font-family:var(--font);color:var(--g800);background:#fff;outline:none;
   transition:border-color .15s;
 }
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal)}
 .form-group textarea{resize:vertical;min-height:80px}
-.form-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-actions{display:flex;gap:8px;margin-top:14px}
 
-/* ─── BUTTONS ─── */
-.btn{
-  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;
-  border-radius:var(--r12);border:none;cursor:pointer;font-size:13px;
-  font-weight:700;font-family:var(--font);transition:all .15s;
+/* ===== CHARTS ===== */
+.chart-row{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid var(--g100)}
+.chart-row:last-child{border-bottom:none}
+.chart-lbl{font-size:12px;font-weight:600;color:var(--g600);min-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:8px;background:var(--g200);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .6s ease}
+.chart-val{font-size:12px;font-weight:700;min-width:30px;text-align:right}
+
+/* ===== TABLE ===== */
+.tbl-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--g200)}
+table{width:100%;border-collapse:collapse;min-width:500px}
+th{
+  background:var(--g50);padding:10px 12px;
+  font-size:11px;font-weight:800;color:var(--g600);
+  text-align:left;border-bottom:1px solid var(--g200);
+  white-space:nowrap;
 }
-.btn:active{transform:scale(0.97)}
-.btn-primary{background:var(--teal-d);color:#fff}
-.btn-primary:active{background:var(--teal)}
-.btn-outline{background:transparent;color:var(--teal-d);border:2px solid var(--teal-l)}
-.btn-outline:active{background:var(--teal-xl)}
-.btn-danger{background:#FFEBEE;color:#B71C1C;border:1px solid #FFCDD2}
-.btn-sm{padding:6px 12px;font-size:12px}
-.btn-block{width:100%;justify-content:center}
-
-/* ─── NOTE CARDS ─── */
-.note-card{border-left:3px solid var(--teal);padding:13px 14px;background:var(--gray50);border-radius:0 var(--r12) var(--r12) 0;margin-bottom:10px}
-.note-card.doctor{border-left-color:var(--green)}
-.note-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:8px}
-.note-author{font-weight:700;font-size:13px;color:var(--gray800)}
-.note-role{font-weight:400;font-size:11px;color:var(--gray500)}
-.note-time{font-size:10px;color:var(--gray400);flex-shrink:0;margin-top:2px}
-.note-body{font-size:13px;line-height:1.6;color:var(--gray600)}
-.note-tasks{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
-.task-chip{background:#FFF8E1;color:#E65100;padding:3px 10px;border-radius:var(--r-full);font-size:10px;font-weight:600}
-
-/* ─── TIMELINE ─── */
-.tl-item{display:flex;gap:12px;margin-bottom:4px}
-.tl-left{display:flex;flex-direction:column;align-items:center;width:20px;flex-shrink:0}
-.tl-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:14px;border:2px solid #fff;box-shadow:var(--shadow-xs)}
-.tl-line{width:2px;background:var(--gray200);flex:1;margin-top:4px;border-radius:1px}
-.tl-card{flex:1;background:#fff;border-radius:var(--r12);padding:13px;box-shadow:var(--shadow-xs);margin-bottom:8px;border:1px solid var(--gray100)}
-.tl-hdr{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
-.tl-icon{font-size:20px;flex-shrink:0}
-.tl-title{font-weight:700;font-size:13px;color:var(--gray800)}
-.tl-time{font-size:10px;color:var(--gray400);margin-top:2px}
-.tl-body{font-size:12px;color:var(--gray600);line-height:1.5}
-
-/* ─── MED ROWS ─── */
-.med-row{padding:13px 0;border-bottom:1px solid var(--gray100)}
-.med-row:last-child{border-bottom:none}
-.med-name{font-weight:700;font-size:13px;color:var(--gray800)}
-.med-detail{font-size:11px;color:var(--gray500);margin-top:2px}
-.med-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.dose-chip{
-  display:inline-flex;align-items:center;gap:4px;padding:5px 11px;
-  border-radius:var(--r-full);font-size:11px;font-weight:700;cursor:pointer;
-  border:1.5px solid;transition:all .15s;
+td{
+  padding:10px 12px;border-bottom:1px solid var(--g100);
+  font-size:12px;color:var(--g700);vertical-align:middle;
 }
-.dose-chip.given{background:#E8F5E9;color:#2E7D32;border-color:#A5D6A7}
-.dose-chip.pending{background:#FFF8E1;color:#E65100;border-color:#FFE082}
-.dose-chip.overdue{background:#FFEBEE;color:#B71C1C;border-color:#FFCDD2}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--g50)}
 
-/* ─── LAB ROWS ─── */
-.lab-row{display:flex;align-items:center;padding:11px 0;border-bottom:1px solid var(--gray100);gap:10px}
-.lab-row:last-child{border-bottom:none}
-.lab-test{flex:1;font-weight:600;font-size:13px;color:var(--gray800)}
-.lab-val{font-size:15px;font-weight:800;min-width:70px}
-.lab-ref{font-size:10px;color:var(--gray400);min-width:60px}
+/* ===== PILL ===== */
+.pill{
+  display:inline-block;padding:3px 10px;border-radius:20px;
+  font-size:11px;font-weight:600;background:var(--g100);color:var(--g700);margin:2px 2px 2px 0;
+}
+.pill-allergy{background:#FFEBEE;color:#C62828}
+.pill-wrap{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
 
-/* ─── PILLS ─── */
-.pill-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.pill{background:var(--gray100);border-radius:var(--r-full);padding:4px 11px;font-size:11px;color:var(--gray700);font-weight:500}
-.pill-danger{background:#FFEBEE;color:#B71C1C;font-weight:700}
-.allergy-pill{background:#FFEBEE;color:#B71C1C;border-radius:var(--r-full);padding:4px 11px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:3px}
+/* ===== NOTE CARD ===== */
+.note-card{
+  background:#fff;border:1.5px solid var(--g200);border-radius:14px;
+  padding:14px;margin-bottom:10px;
+}
+.note-card.doctor{border-color:var(--teal-l);background:var(--teal-xl)}
+.note-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.note-author{font-size:13px;font-weight:800;color:var(--g800)}
+.note-role{font-size:11px;color:var(--teal-d);font-weight:700}
+.note-time{font-size:10px;color:var(--g400);font-family:var(--mono)}
+.note-body{font-size:13px;color:var(--g700);line-height:1.6}
+.note-tasks{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+.task-chip{
+  background:var(--teal-xl);color:var(--teal-d);
+  border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;
+}
 
-/* ─── INFO ROWS ─── */
-.info-row{padding:10px 0;border-bottom:1px solid var(--gray100)}
+/* ===== INFO ROW ===== */
+.info-row{display:flex;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--g100)}
 .info-row:last-child{border-bottom:none}
-.info-lbl{font-size:10px;color:var(--gray400);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
-.info-val{font-size:14px;font-weight:600;color:var(--gray800);margin-top:3px}
+.info-lbl{font-size:11px;font-weight:700;color:var(--g500);min-width:130px;padding-top:2px;text-transform:uppercase;letter-spacing:0.3px}
+.info-val{font-size:13px;color:var(--g700);font-weight:500}
 
-/* ─── TOAST ─── */
-.toast{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);
-  background:var(--gray800);color:#fff;padding:12px 20px;border-radius:var(--r12);
-  font-size:13px;font-weight:600;box-shadow:var(--shadow-lg);z-index:9999;
-  opacity:0;transition:all .3s;white-space:nowrap;max-width:90vw;text-align:center;
+/* ===== EMPTY STATE ===== */
+.empty-state{text-align:center;padding:48px 20px}
+.empty-ico{font-size:40px;display:block;margin-bottom:12px;opacity:.5}
+.empty-txt{font-size:14px;font-weight:600;color:var(--g400)}
+.empty-sub{font-size:12px;color:var(--g300);margin-top:4px}
+
+/* ===== RESIDENT SELECTOR ===== */
+.res-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.res-chip{
+  display:flex;align-items:center;gap:6px;padding:7px 12px;
+  border-radius:10px;cursor:pointer;font-size:12px;font-weight:700;
+  border:2px solid var(--g200);background:#fff;color:var(--g600);
+  transition:all .15s;
 }
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.success{background:var(--green)}
-.toast.error{background:#C62828}
-.toast.warning{background:#E65100}
+.res-chip:hover{border-color:var(--teal-l);background:var(--teal-xl)}
+.res-chip.selected{border-color:var(--teal);background:var(--teal-xl);color:var(--teal-d)}
+.res-chip-av{
+  width:20px;height:20px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;font-weight:900;color:#fff;
+}
 
-/* ─── RESIDENT DETAIL HEADER ─── */
+/* ===== TOAST ===== */
+#toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--g800);color:#fff;padding:11px 20px;border-radius:12px;
+  font-size:13px;font-weight:700;z-index:99999;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,0.3);
+}
+#toast.show{transform:translateX(-50%) translateY(0)}
+#toast.success{background:var(--green)}
+#toast.warning{background:var(--amber);color:var(--g800)}
+#toast.error{background:var(--coral)}
+
+/* ===== USER DROPDOWN ===== */
+.ud-wrap{position:relative}
+.ud-menu{
+  position:absolute;top:calc(100% + 8px);right:0;
+  width:220px;background:#fff;border-radius:14px;
+  box-shadow:var(--shadow-lg);border:1px solid var(--g200);
+  z-index:200;display:none;overflow:hidden;
+}
+.ud-menu.open{display:block;animation:dropIn .15s ease}
+@keyframes dropIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.ud-hdr{padding:14px 16px;background:var(--teal-xl);border-bottom:1px solid var(--teal-l)}
+.ud-name{font-size:14px;font-weight:800;color:var(--g800)}
+.ud-role{font-size:11px;color:var(--teal-d);font-weight:700;margin-top:2px}
+.ud-item{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;
+  cursor:pointer;font-size:13px;font-weight:600;color:var(--g700);
+  border-bottom:1px solid var(--g100);transition:background .12s;
+}
+.ud-item:last-child{border-bottom:none}
+.ud-item:hover{background:var(--g50)}
+.ud-item.danger{color:var(--coral)}
+.ud-item.danger:hover{background:#FFF5F5}
+
+/* ===== PROGRESS BAR ===== */
+.prog-bar{height:6px;background:var(--g200);border-radius:3px;overflow:hidden;margin-top:8px}
+.prog-fill{height:100%;border-radius:3px;transition:width .6s ease}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .sidebar{display:none}
+  .topbar{padding:0 14px}
+  .page{padding:16px}
+  .grid-4{grid-template-columns:1fr 1fr}
+  .vitals-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .vitals-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+  .tb-search{display:none}
+}
+
+/* ===== CARE PLAN ===== */
+.goal-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 0;border-bottom:1px solid var(--g100);
+}
+.goal-item:last-child{border-bottom:none}
+.goal-check{
+  width:20px;height:20px;border-radius:6px;background:var(--teal-xl);
+  border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:var(--teal);flex-shrink:0;margin-top:1px;
+}
+
+/* Detail view */
 .res-detail-hdr{
-  display:flex;align-items:center;gap:14px;margin-bottom:16px;
-  background:#fff;border-radius:var(--r16);padding:16px;
-  box-shadow:var(--shadow-xs);border:1px solid var(--gray100);
+  display:flex;align-items:center;gap:16px;
+  padding:16px;background:linear-gradient(135deg,var(--teal-d),var(--teal));
+  border-radius:16px;margin-bottom:14px;color:#fff;
 }
-.res-detail-av{width:56px;height:56px;border-radius:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff}
-.res-detail-name{font-size:18px;font-weight:800;color:var(--gray800);letter-spacing:-0.3px}
-.res-detail-meta{font-size:12px;color:var(--gray500);margin-top:3px}
-.res-action-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-
-/* ─── SECTION DIVIDER ─── */
-.sec-divider{font-size:11px;font-weight:700;color:var(--gray400);text-transform:uppercase;letter-spacing:.8px;margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--gray200)}
-
-/* ─── EMPTY STATE ─── */
-.empty-state{text-align:center;padding:40px 20px;color:var(--gray400)}
-.empty-state-icon{font-size:40px;margin-bottom:10px}
-.empty-state-text{font-size:14px;font-weight:500}
-
-/* ─── FLOATING ACTION ─── */
-.fab{
-  position:fixed;bottom:20px;right:20px;width:52px;height:52px;
-  border-radius:50%;background:var(--teal-d);color:#fff;border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;font-size:24px;
-  box-shadow:0 4px 16px rgba(0,105,92,0.4);z-index:100;transition:all .2s;
+.res-detail-av{
+  width:56px;height:56px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:900;color:#fff;
+  background:rgba(255,255,255,0.2);flex-shrink:0;
 }
-.fab:active{transform:scale(0.92)}
-
-/* ─── CONDITION STRIP ─── */
-.cond-strip{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px}
-.cond-strip::-webkit-scrollbar{display:none}
-.cond-pill{
-  flex-shrink:0;padding:6px 14px;border-radius:var(--r-full);
-  font-size:12px;font-weight:700;background:var(--gray100);color:var(--gray600);
-  cursor:pointer;transition:all .15s;border:2px solid transparent;
-}
-.cond-pill.active{background:var(--teal-d);color:#fff;border-color:var(--teal-d)}
-
-/* ─── FORM SECTION BOX ─── */
-.form-box{background:var(--gray50);border:1px solid var(--gray200);border-radius:var(--r12);padding:16px;margin-bottom:12px;display:none}
-.form-box.visible{display:block;animation:fadeUp .2s ease}
+.res-detail-name{font-size:20px;font-weight:900;color:#fff}
+.res-detail-meta{font-size:12px;color:rgba(255,255,255,0.75);margin-top:3px}
+.res-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 </style>
 </head>
 <body>
 
-<!-- ══ LOGIN SCREEN ═══════════════════════════════════════════ -->
+<!-- ===== LOGIN ===== -->
 <div id="login-screen">
   <div class="login-wrap">
     <div class="login-brand">
-      <div class="login-brand-icon">🏥</div>
-      <div class="login-brand-name">CareCore</div>
-      <div class="login-brand-sub">Senior Living Health Platform · v2.0</div>
+      <div class="brand-logo">🏥</div>
+      <div class="brand-name">CareCore</div>
+      <div class="brand-sub">Senior Living Health Platform · v3.0</div>
     </div>
     <div class="login-card">
-      <div class="login-card-title">Who are you?</div>
-      <div class="role-grid" id="role-grid">
-        <div class="role-card selected" data-role="Doctor" onclick="selectRole(this)">
-          <span class="role-card-icon">🩺</span>
-          <div class="role-card-label">Doctor</div>
-          <div class="role-card-desc">Clinical records & prescriptions</div>
+      <div id="login-view">
+        <div class="card-title-sm" id="login-title">Sign in to CareCore</div>
+        <div class="role-grid" id="role-grid">
+          <div class="role-card" onclick="selectRole('Doctor',this)">
+            <span class="role-icon">👨‍⚕️</span>
+            <div class="role-lbl">Doctor</div>
+            <div class="role-desc">Clinical records & prescriptions</div>
+          </div>
+          <div class="role-card" onclick="selectRole('Caregiver',this)">
+            <span class="role-icon">🤝</span>
+            <div class="role-lbl">Caregiver</div>
+            <div class="role-desc">Daily care & medication admin</div>
+          </div>
+          <div class="role-card" onclick="selectRole('Nurse',this)">
+            <span class="role-icon">👩‍⚕️</span>
+            <div class="role-lbl">Nurse</div>
+            <div class="role-desc">Vitals, alerts & clinical notes</div>
+          </div>
+          <div class="role-card" onclick="selectRole('Admin',this)">
+            <span class="role-icon">🏛️</span>
+            <div class="role-lbl">Admin</div>
+            <div class="role-desc">Facility oversight & reports</div>
+          </div>
+          <div class="role-card" onclick="selectRole('Resident',this)">
+            <span class="role-icon">🏠</span>
+            <div class="role-lbl">Resident</div>
+            <div class="role-desc">My health & appointments</div>
+          </div>
+          <div class="role-card" onclick="selectRole('Family',this)">
+            <span class="role-icon">👨‍👩‍👧</span>
+            <div class="role-lbl">Family</div>
+            <div class="role-desc">Monitor my loved one</div>
+          </div>
         </div>
-        <div class="role-card" data-role="Caregiver" onclick="selectRole(this)">
-          <span class="role-card-icon">🤲</span>
-          <div class="role-card-label">Caregiver</div>
-          <div class="role-card-desc">Daily care & medication admin</div>
+        <!-- Login form -->
+        <div id="lform">
+          <div id="lerr" class="err-box"></div>
+          <div class="field"><label>Email</label><input id="lemail" type="email" placeholder="doctor@carecore.health" autocomplete="email"/></div>
+          <div class="field"><label>Password</label><input id="lpass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+          <button class="login-btn" id="lbtn" onclick="doLogin()"><span>Sign In to CareCore</span><span>→</span></button>
+          <div class="login-links">
+            <span class="login-link" onclick="showSignup()">No account? Sign Up</span>
+            <span class="login-link" onclick="showForgot()">Forgot password?</span>
+          </div>
+          <div class="demo-hint">
+            Demo: <strong>doctor@carecore.health</strong> / <strong>CareCore@2026</strong>
+          </div>
         </div>
-        <div class="role-card" data-role="Nurse" onclick="selectRole(this)">
-          <span class="role-card-icon">👩‍⚕️</span>
-          <div class="role-card-label">Nurse</div>
-          <div class="role-card-desc">Vitals, alerts & clinical notes</div>
+        <!-- Signup form -->
+        <div id="sform" style="display:none">
+          <div id="serr" class="err-box"></div>
+          <div id="ssuc" class="suc-box"></div>
+          <div class="field"><label>Full Name</label><input id="sname" placeholder="Dr. Arjun Mehta"/></div>
+          <div class="field"><label>Email</label><input id="semail" type="email" placeholder="your@email.com"/></div>
+          <div class="field"><label>Password</label><input id="spass" type="password" placeholder="Min 8 characters"/></div>
+          <div class="field"><label>Confirm Password</label><input id="spass2" type="password" placeholder="Re-enter password" onkeydown="if(event.key==='Enter')doSignup()"/></div>
+          <button class="login-btn" id="sbtn" onclick="doSignup()"><span>Create Account</span><span>→</span></button>
+          <div class="login-links" style="justify-content:center">
+            <span class="login-link" onclick="showLogin()">← Back to Sign In</span>
+          </div>
         </div>
-        <div class="role-card" data-role="Admin" onclick="selectRole(this)">
-          <span class="role-card-icon">🏛️</span>
-          <div class="role-card-label">Admin</div>
-          <div class="role-card-desc">Facility oversight & reports</div>
+        <!-- Forgot form -->
+        <div id="fform" style="display:none">
+          <div id="ferr" class="err-box"></div>
+          <div id="fsuc" class="suc-box"></div>
+          <p style="font-size:13px;color:var(--g500);margin-bottom:14px">Enter your email and we'll send a reset link.</p>
+          <div class="field"><label>Email</label><input id="femail" type="email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')doForgot()"/></div>
+          <button class="login-btn" onclick="doForgot()"><span>Send Reset Link</span><span>→</span></button>
+          <div class="login-links" style="justify-content:center;margin-top:12px">
+            <span class="login-link" onclick="showLogin()">← Back to Sign In</span>
+          </div>
         </div>
       </div>
-      <div id="login-error" class="login-error"></div>
-      <div class="lfield">
-        <label>Username</label>
-        <input id="l-user" type="text" placeholder="Enter your username" autocomplete="username"/>
-      </div>
-      <div class="lfield">
-        <label>Password</label>
-        <input id="l-pass" type="password" placeholder="••••••••" autocomplete="current-password"
-          onkeydown="if(event.key==='Enter')doLogin()"/>
-      </div>
-      <button class="login-btn" onclick="doLogin()">
-        <span>Sign In to CareCore</span><span>→</span>
-      </button>
-      <div class="login-demo">Demo: any username &amp; password · <strong>role changes your view</strong></div>
     </div>
   </div>
 </div>
 
-<!-- ══ APP SHELL ══════════════════════════════════════════════ -->
+<!-- ===== APP ===== -->
 <div id="app">
-
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <button class="tb-menu-btn" onclick="openSidebar()">
-      <div class="tb-hamburger"><span></span><span></span><span></span></div>
-    </button>
-    <div class="tb-center">
-      <div class="tb-title" id="tb-title">Dashboard</div>
-      <div class="tb-sub" id="tb-sub">CareCore EHMR</div>
-    </div>
-    <button class="tb-user-btn" onclick="toggleUserDropdown()" id="tb-user-btn">
-      <div class="tb-avatar" id="tb-avatar">?</div>
-    </button>
-  </div>
-
-  <!-- USER DROPDOWN -->
-  <div class="user-dropdown" id="user-dropdown">
-    <div class="ud-header">
-      <div class="ud-name" id="ud-name">—</div>
-      <div class="ud-role-tag" id="ud-role-tag">—</div>
-    </div>
-    <div class="ud-item" onclick="showProfile()">
-      <span class="ud-item-icon">👤</span>My Profile
-    </div>
-    <div class="ud-item" onclick="closeDropdownGoPage('settings')">
-      <span class="ud-item-icon">⚙️</span>Settings
-    </div>
-    <div class="ud-item danger" onclick="doLogout()">
-      <span class="ud-item-icon">🚪</span>Sign Out
-    </div>
-  </div>
-
-  <!-- SIDEBAR OVERLAY -->
-  <div class="sidebar-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
-
   <!-- SIDEBAR -->
-  <div class="sidebar" id="sidebar">
-    <div class="sb-header">
-      <div class="sb-logo-icon">🏥</div>
-      <div>
-        <div class="sb-logo-name">CareCore</div>
-        <div class="sb-logo-ver">EHMR v2.0</div>
+  <div class="app-body">
+    <div class="sidebar" id="sidebar">
+      <div class="sb-header">
+        <div class="sb-logo">🏥</div>
+        <div class="sb-brand">
+          <div class="sb-brand-name">CareCore</div>
+          <div class="sb-brand-ver">v3.0 · Web</div>
+        </div>
+        <button class="sb-collapse-btn" onclick="toggleSidebar()" title="Collapse">⟨</button>
       </div>
-      <button class="sb-close" onclick="closeSidebar()">✕</button>
-    </div>
-    <div class="sb-user">
-      <div class="sb-user-card">
-        <div class="sb-user-av" id="sb-avatar">?</div>
-        <div>
-          <div class="sb-user-name" id="sb-user-name">—</div>
-          <div class="sb-user-role" id="sb-user-role">—</div>
+      <div class="sb-user" id="sb-user">
+        <div class="sb-user-card">
+          <div class="sb-av" id="sb-av"></div>
+          <div style="flex:1;overflow:hidden">
+            <div class="sb-uname" id="sb-uname"></div>
+            <div class="sb-urole" id="sb-urole"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sb-nav">
+        <div class="sb-section">Main</div>
+        <div class="sb-item active" data-page="dashboard" onclick="nav('dashboard')"><span class="sb-item-ico">📊</span><span class="sb-item-txt">Dashboard</span></div>
+        <div class="sb-item" data-page="residents" onclick="nav('residents')"><span class="sb-item-ico">👥</span><span class="sb-item-txt">Residents</span></div>
+        <div class="sb-item" data-page="alerts" onclick="nav('alerts')"><span class="sb-item-ico">🔔</span><span class="sb-item-txt">Alerts</span><span class="sb-badge" id="sb-alert-badge">0</span></div>
+        <div class="sb-section">Clinical</div>
+        <div class="sb-item" data-page="vitals" onclick="nav('vitals')"><span class="sb-item-ico">💓</span><span class="sb-item-txt">Vitals Monitor</span></div>
+        <div class="sb-item" data-page="emar" onclick="nav('emar')"><span class="sb-item-ico">💊</span><span class="sb-item-txt">eMAR</span></div>
+        <div class="sb-item" data-page="notes" onclick="nav('notes')"><span class="sb-item-ico">📝</span><span class="sb-item-txt">Shift Notes</span></div>
+        <div class="sb-item" data-page="labs" onclick="nav('labs')"><span class="sb-item-ico">🔬</span><span class="sb-item-txt">Lab Reports</span></div>
+        <div class="sb-section">Records</div>
+        <div class="sb-item" data-page="timeline" onclick="nav('timeline')"><span class="sb-item-ico">📈</span><span class="sb-item-txt">Timeline</span></div>
+        <div class="sb-item" data-page="careplan" onclick="nav('careplan')"><span class="sb-item-ico">📋</span><span class="sb-item-txt">Care Plan</span></div>
+        <div class="sb-item" data-page="appointments" onclick="nav('appointments')"><span class="sb-item-ico">📅</span><span class="sb-item-txt">Appointments</span></div>
+        <div class="sb-section sb-sys-sec">System</div>
+        <div class="sb-item sb-sys-item" data-page="audit" onclick="nav('audit')"><span class="sb-item-ico">🔐</span><span class="sb-item-txt">Audit Log</span></div>
+      </div>
+      <div class="sb-footer">
+        <div class="sb-logout" onclick="doLogout()">
+          <span style="font-size:16px">🚪</span>
+          <span class="sb-item-txt">Sign Out</span>
         </div>
       </div>
     </div>
-    <nav class="sb-nav" id="sb-nav">
-      <div class="sb-section">Overview</div>
-      <div class="sb-item active" data-page="dashboard" onclick="nav('dashboard')"><span class="sb-item-icon">📊</span>Dashboard</div>
-      <div class="sb-item" data-page="alerts" onclick="nav('alerts')"><span class="sb-item-icon">🔔</span>Alerts<span class="sb-badge" id="alert-badge">0</span></div>
-      <div class="sb-section">Clinical</div>
-      <div class="sb-item" data-page="residents" onclick="nav('residents')"><span class="sb-item-icon">👥</span>Residents</div>
-      <div class="sb-item" data-page="vitals" onclick="nav('vitals')"><span class="sb-item-icon">💓</span>Vitals Monitor</div>
-      <div class="sb-item" data-page="emar" onclick="nav('emar')"><span class="sb-item-icon">💊</span>eMAR</div>
-      <div class="sb-item" data-page="notes" onclick="nav('notes')"><span class="sb-item-icon">📝</span>Shift Notes</div>
-      <div class="sb-item" data-page="labs" onclick="nav('labs')"><span class="sb-item-icon">🔬</span>Lab Reports</div>
-      <div class="sb-item" data-page="timeline" onclick="nav('timeline')"><span class="sb-item-icon">📈</span>Timeline</div>
-      <div class="sb-section">Management</div>
-      <div class="sb-item" data-page="careplan" onclick="nav('careplan')"><span class="sb-item-icon">📋</span>Care Plans</div>
-      <div class="sb-item" data-page="appointments" onclick="nav('appointments')"><span class="sb-item-icon">📅</span>Appointments</div>
-      <div class="sb-section sb-system-section">System</div>
-      <div class="sb-item sb-system-item" data-page="audit" onclick="nav('audit')"><span class="sb-item-icon">🔒</span>Audit Log</div>
-    </nav>
-    <div class="sb-footer">
-      <div class="sb-logout" onclick="doLogout()">
-        <span style="font-size:18px">🚪</span>Sign Out
+
+    <!-- MAIN AREA -->
+    <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <div>
+          <div class="tb-title" id="tb-title">Dashboard</div>
+        </div>
+        <div class="tb-spacer"></div>
+        <div class="tb-search">
+          <span class="tb-search-ico">🔍</span>
+          <input placeholder="Search residents, meds…" oninput="globalSearch(this.value)"/>
+        </div>
+        <button class="tb-btn" onclick="nav('alerts')" title="Alerts">
+          🔔
+          <span class="tb-alert-dot" id="tb-dot" style="display:none"></span>
+        </button>
+        <div class="ud-wrap">
+          <div class="tb-avatar" id="tb-avatar" onclick="toggleUD()"></div>
+          <div class="ud-menu" id="ud-menu">
+            <div class="ud-hdr">
+              <div class="ud-name" id="ud-name"></div>
+              <div class="ud-role" id="ud-role"></div>
+            </div>
+            <div class="ud-item" onclick="closeUD();nav('dashboard')">📊 Dashboard</div>
+            <div class="ud-item" onclick="toast('Profile settings coming soon','info')">⚙️ Profile Settings</div>
+            <div class="ud-item danger" onclick="doLogout()">🚪 Sign Out</div>
+          </div>
+        </div>
       </div>
+
+      <!-- PAGES -->
+      <div class="main" id="main">
+
+        <!-- DASHBOARD -->
+        <div class="page active" id="page-dashboard">
+          <div class="page-hdr">
+            <div>
+              <div class="page-title" id="dash-greeting">Good morning</div>
+              <div class="page-sub" id="dash-date"></div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="loadDash()">↻ Refresh</button>
+          </div>
+          <div class="grid-4" id="dash-stats" style="margin-bottom:20px"></div>
+          <div class="grid-2">
+            <div>
+              <div class="card">
+                <div class="card-hdr"><div class="card-ttl">🔔 Active Alerts</div><button class="btn btn-outline btn-sm" onclick="nav('alerts')">View All</button></div>
+                <div id="dash-alerts"></div>
+              </div>
+              <div class="card">
+                <div class="card-hdr"><div class="card-ttl">💊 Med Compliance Today</div></div>
+                <div id="dash-meds"></div>
+              </div>
+            </div>
+            <div>
+              <div class="card">
+                <div class="card-hdr"><div class="card-ttl">👥 Residents</div><button class="btn btn-outline btn-sm" onclick="nav('residents')">View All</button></div>
+                <div id="dash-residents"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESIDENTS -->
+        <div class="page" id="page-residents">
+          <div id="res-list-view">
+            <div class="page-hdr">
+              <div><div class="page-title">Residents</div><div class="page-sub">All registered residents</div></div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px" id="cond-filters">
+              <button class="btn btn-primary btn-sm" onclick="filterRes('All',this)">All</button>
+              <button class="btn btn-outline btn-sm" onclick="filterRes('Stable',this)">Stable</button>
+              <button class="btn btn-outline btn-sm" onclick="filterRes('Monitor',this)">Monitor</button>
+              <button class="btn btn-outline btn-sm" onclick="filterRes('Recovery',this)">Recovery</button>
+            </div>
+            <div id="res-list"></div>
+          </div>
+          <div id="res-detail" style="display:none"></div>
+        </div>
+
+        <!-- ALERTS -->
+        <div class="page" id="page-alerts">
+          <div class="page-hdr">
+            <div><div class="page-title">Alerts</div><div class="page-sub" id="alerts-sub"></div></div>
+            <button class="btn btn-outline btn-sm" onclick="ackAll()">✓ Acknowledge All</button>
+          </div>
+          <div id="alerts-list"></div>
+        </div>
+
+        <!-- VITALS -->
+        <div class="page" id="page-vitals">
+          <div class="page-hdr">
+            <div><div class="page-title">Vitals Monitor</div></div>
+            <button class="btn btn-primary btn-sm" onclick="toggleForm('vform')">+ Record Vitals</button>
+          </div>
+          <div class="res-chips" id="vitals-chips"></div>
+          <div class="form-section" id="vform">
+            <div style="font-size:13px;font-weight:800;color:var(--teal-d);margin-bottom:12px">📝 Record New Vitals</div>
+            <div class="form-grid">
+              <div class="form-group"><label>BP (sys/dia)</label><input id="v-bp" placeholder="128/82"/></div>
+              <div class="form-group"><label>Pulse (bpm)</label><input id="v-pulse" type="number" placeholder="72"/></div>
+              <div class="form-group"><label>SpO₂ (%)</label><input id="v-spo2" type="number" placeholder="97"/></div>
+              <div class="form-group"><label>Temperature (°C)</label><input id="v-temp" type="number" step="0.1" placeholder="36.8"/></div>
+              <div class="form-group"><label>Glucose (mg/dL)</label><input id="v-glucose" type="number" placeholder="142"/></div>
+              <div class="form-group"><label>Weight (kg)</label><input id="v-weight" type="number" step="0.1" placeholder="68"/></div>
+            </div>
+            <div class="form-group" style="margin-top:10px"><label>Notes</label><textarea id="v-notes" placeholder="Observations…"></textarea></div>
+            <div class="form-actions">
+              <button class="btn btn-primary" onclick="saveVitals()">💾 Save Vitals</button>
+              <button class="btn btn-outline" onclick="toggleForm('vform')">Cancel</button>
+            </div>
+          </div>
+          <div id="vitals-content"></div>
+        </div>
+
+        <!-- eMAR -->
+        <div class="page" id="page-emar">
+          <div class="page-hdr">
+            <div><div class="page-title">eMAR</div><div class="page-sub">Medication Administration Record</div></div>
+          </div>
+          <div class="res-chips" id="emar-chips"></div>
+          <div id="emar-content"></div>
+        </div>
+
+        <!-- NOTES -->
+        <div class="page" id="page-notes">
+          <div class="page-hdr">
+            <div><div class="page-title">Shift Notes</div></div>
+            <button class="btn btn-primary btn-sm" onclick="toggleForm('nform')">+ Add Note</button>
+          </div>
+          <div class="form-section" id="nform">
+            <div style="font-size:13px;font-weight:800;color:var(--teal-d);margin-bottom:12px">📝 New Shift Note</div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label>Shift</label>
+              <select id="n-shift"><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option></select>
+            </div>
+            <div class="form-group" style="margin-bottom:10px"><label>Note</label><textarea id="n-note" placeholder="Clinical observations, events, handover notes…"></textarea></div>
+            <div class="form-group" style="margin-bottom:10px"><label>Action Items (comma separated)</label><input id="n-tasks" placeholder="Check glucose at 20:00, Physio tomorrow 09:00"/></div>
+            <div class="form-actions">
+              <button class="btn btn-primary" onclick="saveNote()">💾 Save Note</button>
+              <button class="btn btn-outline" onclick="toggleForm('nform')">Cancel</button>
+            </div>
+          </div>
+          <div id="notes-list"></div>
+        </div>
+
+        <!-- LABS -->
+        <div class="page" id="page-labs">
+          <div class="page-hdr">
+            <div><div class="page-title">Lab Reports</div></div>
+          </div>
+          <div class="res-chips" id="labs-chips"></div>
+          <div id="labs-content"></div>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="page" id="page-timeline">
+          <div class="page-hdr"><div><div class="page-title">Clinical Timeline</div></div></div>
+          <div class="res-chips" id="tl-chips"></div>
+          <div id="tl-content"></div>
+        </div>
+
+        <!-- CARE PLAN -->
+        <div class="page" id="page-careplan">
+          <div class="page-hdr"><div><div class="page-title">Care Plan</div><div class="page-sub">Ramesh Iyer · Room 204-A</div></div></div>
+          <div id="careplan-content"></div>
+        </div>
+
+        <!-- APPOINTMENTS -->
+        <div class="page" id="page-appointments">
+          <div class="page-hdr"><div><div class="page-title">Appointments</div></div></div>
+          <div id="appt-content"></div>
+        </div>
+
+        <!-- AUDIT -->
+        <div class="page" id="page-audit">
+          <div class="page-hdr"><div><div class="page-title">Audit Log</div><div class="page-sub">All system activity</div></div></div>
+          <div class="card">
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Time</th><th>User</th><th>Role</th><th>Action</th><th>Resource</th><th>Detail</th></tr></thead>
+                <tbody id="audit-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /main -->
     </div>
   </div>
+</div>
 
-  <!-- MAIN CONTENT -->
-  <div class="main" id="main">
-    <div class="content">
-
-    <!-- ══ DASHBOARD ═══════════════════════════════════════════ -->
-    <div class="page active" id="page-dashboard">
-      <div class="page-header">
-        <div class="page-header-title" id="dash-greeting">Good morning</div>
-        <div class="page-header-sub" id="dash-date">Loading...</div>
-      </div>
-      <div class="stats-grid" id="dash-stats"></div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">🔔 Active Alerts</div>
-          <button class="btn btn-outline btn-sm" onclick="nav('alerts')">View all</button>
-        </div>
-        <div id="dash-alerts"></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">👥 Residents at a Glance</div>
-        </div>
-        <div id="dash-residents"></div>
-      </div>
-      <div class="card" id="dash-meds-card">
-        <div class="card-title">💊 Medication Compliance Today</div>
-        <div id="dash-meds"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">📊 Condition Overview</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-          <div style="text-align:center;padding:12px 6px;background:var(--teal-xl);border-radius:var(--r12)"><div style="font-size:24px;font-weight:800;color:var(--teal-d)">3</div><div style="font-size:10px;color:var(--gray500);font-weight:600;margin-top:3px;text-transform:uppercase">Stable</div></div>
-          <div style="text-align:center;padding:12px 6px;background:#FFF8E1;border-radius:var(--r12)"><div style="font-size:24px;font-weight:800;color:#E65100">1</div><div style="font-size:10px;color:var(--gray500);font-weight:600;margin-top:3px;text-transform:uppercase">Monitor</div></div>
-          <div style="text-align:center;padding:12px 6px;background:#E3F2FD;border-radius:var(--r12)"><div style="font-size:24px;font-weight:800;color:#1565C0">1</div><div style="font-size:10px;color:var(--gray500);font-weight:600;margin-top:3px;text-transform:uppercase">Recovery</div></div>
-          <div style="text-align:center;padding:12px 6px;background:#FFEBEE;border-radius:var(--r12)"><div style="font-size:24px;font-weight:800;color:#B71C1C">0</div><div style="font-size:10px;color:var(--gray500);font-weight:600;margin-top:3px;text-transform:uppercase">Critical</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ RESIDENTS ═══════════════════════════════════════════ -->
-    <div class="page" id="page-residents">
-      <div class="page-header">
-        <div class="page-header-title">Residents</div>
-        <div class="page-header-sub">All active residents</div>
-      </div>
-      <div class="cond-strip" id="res-filter">
-        <div class="cond-pill active" onclick="filterResidents('All',this)">All (5)</div>
-        <div class="cond-pill" onclick="filterResidents('Stable',this)">Stable</div>
-        <div class="cond-pill" onclick="filterResidents('Monitor',this)">Monitor</div>
-        <div class="cond-pill" onclick="filterResidents('Recovery',this)">Recovery</div>
-      </div>
-      <div id="residents-list"></div>
-      <div id="resident-detail-view" style="display:none"></div>
-    </div>
-
-    <!-- ══ VITALS ══════════════════════════════════════════════ -->
-    <div class="page" id="page-vitals">
-      <div class="page-header">
-        <div class="page-header-title">Vitals Monitor</div>
-        <div class="page-header-sub">Select resident below</div>
-      </div>
-      <div class="card" style="padding:0;overflow:hidden">
-        <div id="vitals-res-list" style="padding:6px 8px"></div>
-      </div>
-      <div id="vitals-content"></div>
-      <button class="fab" onclick="toggleVitalsForm()" title="Record Vitals">＋</button>
-      <div class="form-box" id="vitals-form">
-        <div class="card-title" style="margin-bottom:12px">📋 Record New Vitals</div>
-        <div class="form-2col">
-          <div class="form-group"><label>Blood Pressure</label><input id="v-bp" placeholder="128/82"/></div>
-          <div class="form-group"><label>Pulse (bpm)</label><input id="v-pulse" type="number" placeholder="72"/></div>
-          <div class="form-group"><label>SpO₂ (%)</label><input id="v-spo2" type="number" placeholder="97"/></div>
-          <div class="form-group"><label>Temperature (°C)</label><input id="v-temp" type="number" step="0.1" placeholder="36.8"/></div>
-          <div class="form-group"><label>Glucose (mg/dL)</label><input id="v-glucose" type="number" placeholder="120"/></div>
-          <div class="form-group"><label>Weight (kg)</label><input id="v-weight" type="number" step="0.1" placeholder="68"/></div>
-        </div>
-        <div class="form-group"><label>Notes</label><input id="v-notes" placeholder="Observations..."/></div>
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-primary" onclick="saveVitals()">💾 Save Vitals</button>
-          <button class="btn btn-outline" onclick="toggleVitalsForm()">Cancel</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ eMAR ════════════════════════════════════════════════ -->
-    <div class="page" id="page-emar">
-      <div class="page-header">
-        <div class="page-header-title">eMAR</div>
-        <div class="page-header-sub">Medication Administration Record</div>
-      </div>
-      <div class="card" style="padding:0;overflow:hidden">
-        <div id="emar-res-list" style="padding:6px 8px"></div>
-      </div>
-      <div id="emar-content"></div>
-    </div>
-
-    <!-- ══ SHIFT NOTES ══════════════════════════════════════════ -->
-    <div class="page" id="page-notes">
-      <div class="page-header">
-        <div class="page-header-title">Shift Notes</div>
-        <div class="page-header-sub">Ramesh Iyer · Room 204-A</div>
-      </div>
-      <button class="btn btn-primary btn-block" style="margin-bottom:14px" onclick="toggleNoteForm()">＋ Add Shift Note</button>
-      <div class="form-box" id="note-form">
-        <div class="form-2col">
-          <div class="form-group"><label>Shift</label><select id="n-shift"><option>Morning</option><option selected>Evening</option><option>Night</option></select></div>
-          <div class="form-group"><label>Role</label><select id="n-role"><option>Caregiver</option><option>Nurse</option><option>Doctor</option></select></div>
-        </div>
-        <div class="form-group"><label>Note *</label><textarea id="n-note" rows="4" placeholder="Resident condition, medications given, incidents, observations..."></textarea></div>
-        <div class="form-group"><label>Pending Tasks <span style="font-weight:400;color:var(--gray400)">(comma separated)</span></label><input id="n-tasks" placeholder="Evening meds, morning vitals..."/></div>
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-primary" onclick="saveNote()">💾 Save Note</button>
-          <button class="btn btn-outline" onclick="toggleNoteForm()">Cancel</button>
-        </div>
-      </div>
-      <div id="notes-list"></div>
-    </div>
-
-    <!-- ══ LAB REPORTS ══════════════════════════════════════════ -->
-    <div class="page" id="page-labs">
-      <div class="page-header">
-        <div class="page-header-title">Lab Reports</div>
-        <div class="page-header-sub">Select resident below</div>
-      </div>
-      <div class="card" style="padding:0;overflow:hidden">
-        <div id="labs-res-list" style="padding:6px 8px"></div>
-      </div>
-      <div id="labs-content"></div>
-    </div>
-
-    <!-- ══ TIMELINE ═════════════════════════════════════════════ -->
-    <div class="page" id="page-timeline">
-      <div class="page-header">
-        <div class="page-header-title">Clinical Timeline</div>
-        <div class="page-header-sub">Select resident below</div>
-      </div>
-      <div class="card" style="padding:0;overflow:hidden">
-        <div id="tl-res-list" style="padding:6px 8px"></div>
-      </div>
-      <div id="timeline-content"></div>
-    </div>
-
-    <!-- ══ CARE PLANS ════════════════════════════════════════════ -->
-    <div class="page" id="page-careplan">
-      <div class="page-header">
-        <div class="page-header-title">Care Plan</div>
-        <div class="page-header-sub">Ramesh Iyer · Authored by Dr. Priya Nair</div>
-      </div>
-      <div id="careplan-content"></div>
-    </div>
-
-    <!-- ══ APPOINTMENTS ══════════════════════════════════════════ -->
-    <div class="page" id="page-appointments">
-      <div class="page-header">
-        <div class="page-header-title">Appointments</div>
-        <div class="page-header-sub">Upcoming scheduled care</div>
-      </div>
-      <div id="appt-content"></div>
-    </div>
-
-    <!-- ══ ALERTS ════════════════════════════════════════════════ -->
-    <div class="page" id="page-alerts">
-      <div class="page-header">
-        <div class="page-header-title">Clinical Alerts</div>
-        <div class="page-header-sub" id="alerts-sub">Loading...</div>
-      </div>
-      <div id="alerts-list"></div>
-    </div>
-
-    <!-- ══ AUDIT ══════════════════════════════════════════════════ -->
-    <div class="page" id="page-audit">
-      <div class="page-header">
-        <div class="page-header-title">Audit Log</div>
-        <div class="page-header-sub">Immutable access record</div>
-      </div>
-      <div class="card">
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr><th>Time</th><th>User</th><th>Role</th><th>Action</th><th>Resource</th><th>Detail</th></tr></thead>
-            <tbody id="audit-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    </div><!-- /content -->
-  </div><!-- /main -->
-</div><!-- /app -->
-
-<div class="toast" id="toast"></div>
+<div id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-// BACKEND CONFIG
-// ═══════════════════════════════════════════════════════════════
-const API_BASE = 'https://carecore-backend-production.up.railway.app';
-const APP_ICON = '';
-let API_ONLINE = false;
-
-// API fetch with 8s timeout
-async function apiFetch(path, opts = {}) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 8000);
-  try {
-    const r = await fetch(API_BASE + path, {
-      ...opts, signal: ctrl.signal,
-      headers: { 'Content-Type': 'application/json', ...(opts.headers||{}) }
-    });
-    clearTimeout(t);
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return await r.json();
-  } catch(e) { clearTimeout(t); throw e; }
+// ===== LOCAL AUTH =====
+const DEMO_USERS=[
+  {email:'doctor@carecore.health',password:'CareCore@2026',name:'Dr. Priya Nair',role:'doctor'},
+  {email:'caregiver@carecore.health',password:'CareCore@2026',name:'Sunita Rao',role:'caregiver'},
+  {email:'nurse@carecore.health',password:'CareCore@2026',name:'Nurse Deepa Singh',role:'nurse'},
+  {email:'admin@carecore.health',password:'CareCore@2026',name:'Admin Ramesh',role:'admin'},
+  {email:'resident@carecore.health',password:'CareCore@2026',name:'Mr. Sharma',role:'resident'},
+  {email:'family@carecore.health',password:'CareCore@2026',name:'Anita Sharma',role:'family'},
+];
+function getLocalUsers(){try{return JSON.parse(localStorage.getItem('cc_users')||'[]');}catch(e){return[];}}
+function saveLocalUsers(a){try{localStorage.setItem('cc_users',JSON.stringify(a));}catch(e){}}
+function findUser(email,pass){
+  const d=DEMO_USERS.find(u=>u.email===email&&u.password===pass);
+  if(d)return d;
+  return getLocalUsers().find(u=>u.email===email&&u.password===pass)||null;
+}
+function registerUser(name,email,pass,role){
+  if([...DEMO_USERS,...getLocalUsers()].find(u=>u.email===email))
+    return{ok:false,error:'An account with this email already exists.'};
+  const arr=getLocalUsers();arr.push({email,pass,name,role,password:pass});
+  saveLocalUsers(arr);return{ok:true};
 }
 
-async function checkAPI() {
-  try {
-    const d = await apiFetch('/api/dashboard');
-    API_ONLINE = true;
-    return d;
-  } catch(e) { API_ONLINE = false; return null; }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════════════════════
-const ROLES_CONFIG = {
-  Doctor:   { name:'Dr. Priya Nair',   title:'Senior Physician',    initials:'PN', color:'#1D9E75', hidden:[] },
-  Caregiver:{ name:'Sunita Rao',       title:'Senior Caregiver',    initials:'SR', color:'#028090', hidden:['audit','labs'] },
-  Nurse:    { name:'Nurse Deepa Singh',title:'Registered Nurse',    initials:'DS', color:'#7B1FA2', hidden:['audit'] },
-  Admin:    { name:'Rajiv Menon',      title:'Facility Administrator',initials:'RM', color:'#E65100', hidden:['emar','notes','vitals','labs','timeline','careplan'] },
+// ===== ROLE CONFIG =====
+const ROLES={
+  Doctor:{title:'Senior Physician',color:'#00897B',hidden:[]},
+  Caregiver:{title:'Senior Caregiver',color:'#028090',hidden:['audit','labs']},
+  Nurse:{title:'Registered Nurse',color:'#7B1FA2',hidden:['audit']},
+  Admin:{title:'Facility Administrator',color:'#E65100',hidden:['emar','notes','vitals','labs','timeline','careplan']},
+  Resident:{title:'Resident',color:'#1565C0',hidden:['residents','audit','careplan','notes']},
+  Family:{title:'Family Member',color:'#7B1FA2',hidden:['residents','audit','careplan','notes','emar','vitals']},
 };
 
-const RESIDENTS = [
+// ===== DATA =====
+const RESIDENTS=[
   {id:'R001',name:'Ramesh Iyer',initials:'RI',age:78,room:'204-A',blood:'B+',condition:'Stable',admitted:'15 Jan 2024',doctor:'Dr. Priya Nair',caregiver:'Sunita Rao',emergency:{name:'Anand Iyer',relation:'Son',phone:'9876501234'},diagnoses:['Type 2 Diabetes (E11.9)','Hypertension (I10)','Mild Arthritis (M19.9)'],allergies:[{drug:'Penicillin',severity:'severe'},{drug:'Aspirin',severity:'moderate'}],color:'#00897B'},
   {id:'R002',name:'Saraswati Menon',initials:'SM',age:82,room:'108-B',blood:'O+',condition:'Monitor',admitted:'10 Sep 2023',doctor:'Dr. Rajesh Kumar',caregiver:'Deepa Singh',emergency:{name:'Meena Menon',relation:'Daughter',phone:'9876502345'},diagnoses:['CHF (I50.9)','Atrial Fibrillation (I48.91)','CKD Stage 2 (N18.2)'],allergies:[{drug:'Sulfa drugs',severity:'moderate'}],color:'#E53935'},
   {id:'R003',name:'Govind Sharma',initials:'GS',age:71,room:'312-A',blood:'A+',condition:'Stable',admitted:'01 Mar 2024',doctor:'Dr. Priya Nair',caregiver:'Ravi Kumar',emergency:{name:'Rekha Sharma',relation:'Wife',phone:'9876503456'},diagnoses:['COPD (J44.1)','Osteoporosis (M81.0)'],allergies:[{drug:'Ibuprofen',severity:'mild'}],color:'#388E3C'},
   {id:'R004',name:'Lakshmi Pillai',initials:'LP',age:76,room:'201-C',blood:'AB+',condition:'Recovery',admitted:'20 Feb 2024',doctor:'Dr. Amit Shah',caregiver:'Sunita Rao',emergency:{name:'Suresh Pillai',relation:'Son',phone:'9876504567'},diagnoses:['Post Hip Replacement (Z96.641)','Hypertension (I10)'],allergies:[{drug:'Latex',severity:'moderate'}],color:'#5E35B1'},
   {id:'R005',name:'Mohan Das',initials:'MD',age:80,room:'106-A',blood:'O-',condition:'Stable',admitted:'05 Nov 2023',doctor:'Dr. Rajesh Kumar',caregiver:'Deepa Singh',emergency:{name:'Priya Das',relation:'Daughter',phone:'9876505678'},diagnoses:["Parkinson's Disease (G20)",'Depression (F32.9)'],allergies:[{drug:'Codeine',severity:'severe'}],color:'#1565C0'},
 ];
-
-const VITALS_DB = {
+let vitalsData={
   R001:[
     {t:'2026-04-01T08:00:00',bp_s:128,bp_d:82,pulse:74,spo2:97,temp:36.8,glucose:142,weight:68,by:'Sunita Rao',notes:'Morning check — alert, cooperative'},
     {t:'2026-04-01T12:00:00',bp_s:132,bp_d:86,pulse:78,spo2:96,temp:37.0,glucose:168,weight:null,by:'Sunita Rao',notes:'Post-lunch — glucose elevated'},
     {t:'2026-04-01T16:00:00',bp_s:126,bp_d:80,pulse:72,spo2:98,temp:36.6,glucose:134,weight:null,by:'Ravi Kumar',notes:'Afternoon — stable'},
     {t:'2026-03-31T08:00:00',bp_s:130,bp_d:84,pulse:76,spo2:97,temp:36.7,glucose:145,weight:68.2,by:'Sunita Rao',notes:'Morning'},
-    {t:'2026-03-31T12:00:00',bp_s:128,bp_d:80,pulse:74,spo2:97,temp:36.8,glucose:152,weight:null,by:'Sunita Rao',notes:'Midday'},
-    {t:'2026-03-30T08:00:00',bp_s:134,bp_d:88,pulse:80,spo2:95,temp:37.2,glucose:178,weight:68.5,by:'Deepa Singh',notes:'Slightly elevated BP'},
   ],
   R002:[
     {t:'2026-04-01T08:00:00',bp_s:148,bp_d:92,pulse:88,spo2:94,temp:36.9,glucose:null,weight:54,by:'Deepa Singh',notes:'BP elevated — monitoring'},
@@ -830,8 +931,7 @@ const VITALS_DB = {
   R004:[{t:'2026-04-01T08:00:00',bp_s:116,bp_d:74,pulse:66,spo2:98,temp:36.6,glucose:108,weight:62,by:'Sunita Rao',notes:'Post-op vitals good'}],
   R005:[{t:'2026-04-01T08:00:00',bp_s:122,bp_d:80,pulse:72,spo2:97,temp:36.7,glucose:115,weight:65,by:'Deepa Singh',notes:'Stable'}],
 };
-
-const MEDS_DB = {
+let medsData={
   R001:[
     {id:'M1',name:'Metformin 500mg',route:'Oral',freq:'Twice daily',indication:'Type 2 Diabetes',by:'Dr. Priya Nair',times:[{id:'E1',t:'08:00',status:'given',adm:'Sunita Rao'},{id:'E2',t:'20:00',status:'pending'}]},
     {id:'M2',name:'Amlodipine 5mg',route:'Oral',freq:'Once daily',indication:'Hypertension',by:'Dr. Priya Nair',times:[{id:'E3',t:'08:00',status:'given',adm:'Sunita Rao'}]},
@@ -845,8 +945,7 @@ const MEDS_DB = {
     {id:'M3',name:'Digoxin 0.125mg',route:'Oral',freq:'Once daily',indication:'CHF',by:'Dr. Rajesh Kumar',times:[{id:'E9',t:'08:00',status:'given',adm:'Deepa Singh'}]},
   ],
 };
-
-const LABS_DB = {
+let labsData={
   R001:[
     {id:'L1',test:'HbA1c',result:'7.8',unit:'%',ref:'< 7.0',status:'high',date:'2026-03-20',by:'Dr. Priya Nair'},
     {id:'L2',test:'Fasting Glucose',result:'138',unit:'mg/dL',ref:'70–100',status:'high',date:'2026-03-20',by:'Dr. Priya Nair'},
@@ -860,147 +959,158 @@ const LABS_DB = {
     {id:'L3',test:'INR',result:'2.4',unit:'',ref:'2.0–3.0',status:'normal',date:'2026-03-25',by:'Dr. Rajesh Kumar'},
   ],
 };
-
-const NOTES_DB = {
+let notesData={
   R001:[
-    {shift:'Evening',date:'2026-04-01',author:'Sunita Rao',role:'Caregiver',note:'Good day overall. Physiotherapy completed well. Glucose 168 post-lunch — Dr. Nair informed. Evening Calcium pending. Mood: Cheerful.',tasks:['Evening Calcium + Vit D3 at 20:00','Morning vitals 08:00'],t:'2026-04-01T21:00:00'},
+    {shift:'Evening',date:'2026-04-01',author:'Sunita Rao',role:'Caregiver',note:'Good day overall. Physiotherapy completed. Glucose 168 post-lunch — Dr. Nair informed. Evening Calcium pending. Mood: Cheerful.',tasks:['Evening Calcium + Vit D3 at 20:00','Morning vitals 08:00'],t:'2026-04-01T21:00:00'},
     {shift:'Afternoon',date:'2026-04-01',author:'Dr. Priya Nair',role:'Doctor',note:'Reviewed vitals. Glucose 168 mg/dL post-lunch concerning. Dietary modification advised — reduce refined carbs. No medication change at this time.',tasks:[],t:'2026-04-01T13:30:00'},
-    {shift:'Morning',date:'2026-04-01',author:'Deepa Singh',role:'Caregiver',note:'Morning vitals stable. All medications administered. Breakfast well — 80% eaten. Requested physio session at 10:00.',tasks:[],t:'2026-04-01T09:30:00'},
-  ],
+    {shift:'Morning',date:'2026-04-01',author:'Deepa Singh',role:'Nurse',note:'Morning vitals stable. All medications administered. Breakfast well — 80% eaten. Requested physio session at 10:00.',tasks:[],t:'2026-04-01T09:30:00'},
+  ]
 };
-
-let ALERTS = [
-  {id:'A1',res:'Ramesh Iyer',room:'204-A',type:'medication',sev:'critical',msg:'Evening Aspirin 75mg not administered — overdue 45 min',acked:false,t:'2026-04-01T20:15:00'},
-  {id:'A2',res:'Ramesh Iyer',room:'204-A',type:'vital',sev:'warning',msg:'Post-lunch glucose 168 mg/dL — above threshold of 150',acked:false,t:'2026-04-01T12:05:00'},
-  {id:'A3',res:'Saraswati Menon',room:'108-B',type:'vital',sev:'warning',msg:'BP 148/92 mmHg — elevated. Monitoring initiated.',acked:false,t:'2026-04-01T08:10:00'},
-  {id:'A4',res:'Saraswati Menon',room:'108-B',type:'medication',sev:'info',msg:'Warfarin 2mg dose at 18:00 — pending administration',acked:false,t:'2026-04-01T18:00:00'},
+let ALERTS=[
+  {id:'A1',res:'Saraswati Menon',room:'108-B',type:'vital',sev:'critical',msg:'BP 148/92 — elevated, monitoring required',acked:false,t:'2026-04-01T08:05:00'},
+  {id:'A2',res:'Govind Sharma',room:'312-A',type:'vital',sev:'warning',msg:'SpO₂ 92% — COPD patient, check oxygen therapy',acked:false,t:'2026-04-01T08:10:00'},
+  {id:'A3',res:'Ramesh Iyer',room:'204-A',type:'med',sev:'warning',msg:'Calcium + Vit D3 — overdue at 20:00',acked:false,t:'2026-04-01T20:00:00'},
+  {id:'A4',res:'Mohan Das',room:'106-A',type:'lab',sev:'info',msg:'Lab panel due — last drawn 30 days ago',acked:true,t:'2026-04-01T06:00:00'},
 ];
+let auditLog=[];
 
-let vitalsData = JSON.parse(JSON.stringify(VITALS_DB));
-let notesData  = JSON.parse(JSON.stringify(NOTES_DB));
-let labsData   = JSON.parse(JSON.stringify(LABS_DB));
-let auditLog   = [];
-let CURRENT_USER = null;
-let selectedRole = 'Doctor';
-let selectedResId = 'R001';
-let selectedVitalsId = 'R001';
-let selectedEmarId = 'R001';
-let selectedLabsId = 'R001';
-let selectedTlId = 'R001';
+// ===== STATE =====
+let CURRENT_USER=null;let selectedRole=null;
+let selVitals='R001',selEmar='R001',selLabs='R001',selTl='R001',resFilter='All';
+let sidebarCollapsed=false;
 
-// ═══════════════════════════════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════════════════════════════
-function fmt(iso){
-  const d=new Date(iso);
-  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${d.getDate()} ${months[d.getMonth()]} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-}
-function condBadge(c){
-  const m={Stable:'stable',Monitor:'monitor',Recovery:'recovery',Critical:'critical'};
-  return `<span class="badge badge-${m[c]||'stable'}">● ${c}</span>`;
-}
-function labBadge(s){return `<span class="badge badge-${s}">${s==='normal'?'Normal':s==='high'?'↑ High':'↓ Low'}</span>`;}
+// ===== HELPERS =====
+function fmt(t){if(!t)return '';const d=new Date(t);return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short'})+' '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:false});}
+function condBadge(c){const m={Stable:'badge-stable',Monitor:'badge-monitor',Critical:'badge-critical',Recovery:'badge-recovery'};return`<span class="badge ${m[c]||'badge-gray'}">${c}</span>`;}
+function labBadge(s){const m={high:'badge-critical',low:'badge-monitor',normal:'badge-stable'};return`<span class="badge ${m[s]||'badge-gray'}">${s.toUpperCase()}</span>`;}
+function unacked(){return ALERTS.filter(a=>!a.acked);}
+let toastTmr;
 function toast(msg,type='success'){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.className=`toast ${type} show`;
-  setTimeout(()=>t.className='toast',3000);
+  const el=document.getElementById('toast');
+  el.innerHTML=msg;el.className='show '+(type||'');
+  clearTimeout(toastTmr);toastTmr=setTimeout(()=>el.classList.remove('show'),2800);
 }
-function addAudit(action,resource,detail){
-  if(!CURRENT_USER)return;
-  const now=new Date();
-  auditLog.unshift({t:`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`,name:CURRENT_USER.name,role:CURRENT_USER.role,action,resource,detail});
+function addAudit(action,res,detail){
+  auditLog.unshift({t:new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}),name:CURRENT_USER?.name||'System',role:CURRENT_USER?.role||'',action,resource:res,detail});
 }
-function unackedAlerts(){return ALERTS.filter(a=>!a.acked);}
+function toggleForm(id){document.getElementById(id).classList.toggle('open');}
+function resChipsHTML(selId,callback){
+  return RESIDENTS.map(r=>`
+    <div class="res-chip ${r.id===selId?'selected':''}" onclick="${callback}('${r.id}')">
+      <div class="res-chip-av" style="background:${r.color}">${r.initials}</div>${r.name.split(' ')[0]}
+    </div>`).join('');
+}
 
-// ═══════════════════════════════════════════════════════════════
-// LOGIN / LOGOUT / ROLE
-// ═══════════════════════════════════════════════════════════════
-function selectRole(el){
-  selectedRole = el.dataset.role;
+// ===== LOGIN LOGIC =====
+function selectRole(role,el){
+  selectedRole=role;
   document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
 }
-function doLogin(){
-  const u=document.getElementById('l-user').value.trim();
-  const p=document.getElementById('l-pass').value.trim();
-  const err=document.getElementById('login-error');
-  if(!u||!p){err.style.display='block';err.textContent='Please enter username and password.';return;}
-  err.style.display='none';
-  CURRENT_USER = {...ROLES_CONFIG[selectedRole], role:selectedRole};
-  // Check backend in background
-  checkAPI().then(d => {
-    if (d && d.recent_alerts) {
-      d.recent_alerts.forEach(a => {
-        if (!ALERTS.find(x => x.id===String(a.id))) {
-          ALERTS.unshift({ id:String(a.id), res:a.resident_name, room:a.resident_room,
-            type:a.type, sev:a.severity, msg:a.message, acked:!!a.acknowledged,
-            t:a.created_at||new Date().toISOString() });
-        }
-      });
-    }
-  });
+function showLogin(){
+  document.getElementById('lform').style.display='';
+  document.getElementById('sform').style.display='none';
+  document.getElementById('fform').style.display='none';
+  document.getElementById('role-grid').style.display='';
+  document.getElementById('login-title').textContent='Sign in to CareCore';
+}
+function showSignup(){
+  document.getElementById('lform').style.display='none';
+  document.getElementById('sform').style.display='';
+  document.getElementById('fform').style.display='none';
+  document.getElementById('role-grid').style.display='';
+  document.getElementById('login-title').textContent='Create your account';
+}
+function showForgot(){
+  document.getElementById('lform').style.display='none';
+  document.getElementById('sform').style.display='none';
+  document.getElementById('fform').style.display='';
+  document.getElementById('role-grid').style.display='none';
+  document.getElementById('login-title').textContent='Reset password';
+}
+async function doLogin(){
+  const email=document.getElementById('lemail').value.trim();
+  const pass=document.getElementById('lpass').value;
+  const err=document.getElementById('lerr');
+  const btn=document.getElementById('lbtn');
+  if(!email||!pass){err.style.display='block';err.textContent='Please enter email and password.';return;}
+  err.style.display='none';btn.disabled=true;btn.innerHTML='<span>Signing in…</span>';
+  await new Promise(r=>setTimeout(r,400));
+  const u=findUser(email,pass);
+  btn.disabled=false;btn.innerHTML='<span>Sign In to CareCore</span><span>→</span>';
+  if(!u){err.style.display='block';err.textContent='Invalid email or password.';return;}
+  const roleMap={doctor:'Doctor',caregiver:'Caregiver',nurse:'Nurse',admin:'Admin',resident:'Resident',family:'Family'};
+  const appRole=roleMap[u.role]||(selectedRole||'Doctor');
+  const cfg=ROLES[appRole]||ROLES.Doctor;
+  CURRENT_USER={...cfg,name:u.name,initials:u.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2),role:appRole,email:u.email};
   initApp();
+}
+async function doSignup(){
+  const name=document.getElementById('sname').value.trim();
+  const email=document.getElementById('semail').value.trim();
+  const pass=document.getElementById('spass').value;
+  const pass2=document.getElementById('spass2').value;
+  const err=document.getElementById('serr');const suc=document.getElementById('ssuc');
+  const btn=document.getElementById('sbtn');
+  err.style.display='none';suc.style.display='none';
+  if(!name||!email||!pass||!pass2){err.style.display='block';err.textContent='Please fill in all fields.';return;}
+  if(pass.length<8){err.style.display='block';err.textContent='Password must be at least 8 characters.';return;}
+  if(pass!==pass2){err.style.display='block';err.textContent='Passwords do not match.';return;}
+  if(!selectedRole){err.style.display='block';err.textContent='Please select your role above.';return;}
+  btn.disabled=true;btn.innerHTML='<span>Creating account…</span>';
+  await new Promise(r=>setTimeout(r,400));
+  const dbMap={Doctor:'doctor',Caregiver:'caregiver',Nurse:'nurse',Admin:'admin',Resident:'resident',Family:'family'};
+  const result=registerUser(name,email,pass,dbMap[selectedRole]||'resident');
+  btn.disabled=false;btn.innerHTML='<span>Create Account</span><span>→</span>';
+  if(!result.ok){err.style.display='block';err.textContent=result.error;}
+  else{suc.style.display='block';suc.textContent='✅ Account created! Signing you in…';setTimeout(()=>{document.getElementById('lemail').value=email;document.getElementById('lpass').value=pass;showLogin();doLogin();},1200);}
+}
+async function doForgot(){
+  const email=document.getElementById('femail').value.trim();
+  const err=document.getElementById('ferr');const suc=document.getElementById('fsuc');
+  err.style.display='none';suc.style.display='none';
+  if(!email){err.style.display='block';err.textContent='Please enter your email.';return;}
+  await new Promise(r=>setTimeout(r,600));
+  suc.style.display='block';suc.textContent='✅ If this email is registered, a reset link has been sent.';
 }
 function doLogout(){
   CURRENT_USER=null;
+  document.getElementById('app').style.display='none';
   document.getElementById('app').classList.remove('visible');
   document.getElementById('login-screen').style.display='flex';
-  document.getElementById('l-user').value='';
-  document.getElementById('l-pass').value='';
-  closeSidebar();closeUserDropdown();
-}
-function showProfile(){
-  closeUserDropdown();
-  toast(`Signed in as ${CURRENT_USER.name} (${CURRENT_USER.role})`,'success');
+  document.getElementById('lemail').value='';document.getElementById('lpass').value='';
+  showLogin();
 }
 
-// ═══════════════════════════════════════════════════════════════
-// APP INIT
-// ═══════════════════════════════════════════════════════════════
+// ===== INIT APP =====
 function initApp(){
-  // Inject icon if provided
-  if (APP_ICON) {
-    document.querySelectorAll('.login-brand-icon-img,.sb-logo-img').forEach(img => { if(img) img.src = APP_ICON; });
-  }
   const u=CURRENT_USER;
-  // Update topbar
-  const av=document.getElementById('tb-avatar');
-  av.textContent=u.initials; av.style.background=u.color;
-  document.getElementById('tb-sub').textContent=`${u.name} · ${u.role}`;
-  // Update dropdown
-  document.getElementById('ud-name').textContent=u.name;
-  document.getElementById('ud-role-tag').textContent=u.role+' — '+u.title;
-  // Update sidebar user
-  const sav=document.getElementById('sb-avatar');
-  sav.textContent=u.initials; sav.style.background=u.color;
-  document.getElementById('sb-user-name').textContent=u.name;
-  document.getElementById('sb-user-role').textContent=u.title;
-  // Apply role restrictions to nav
-  document.querySelectorAll('.sb-item[data-page]').forEach(item=>{
-    const pg=item.dataset.page;
-    item.style.display=u.hidden.includes(pg)?'none':'';
-  });
-  // Hide system section for non-admin/doctor
-  const sysSec=document.querySelector('.sb-system-section');
-  const sysItems=document.querySelectorAll('.sb-system-item');
-  const allSysHidden=[...sysItems].every(i=>i.style.display==='none');
-  if(sysSec) sysSec.style.display=allSysHidden?'none':'';
-  // Show app
   document.getElementById('login-screen').style.display='none';
-  document.getElementById('app').classList.add('visible');
+  const app=document.getElementById('app');app.style.display='';app.classList.add('visible');
+  // Sidebar user
+  const av=document.getElementById('sb-av');av.textContent=u.initials;av.style.background=u.color;
+  document.getElementById('sb-uname').textContent=u.name;
+  document.getElementById('sb-urole').textContent=u.title;
+  // Topbar avatar
+  const ta=document.getElementById('tb-avatar');ta.textContent=u.initials;ta.style.background=u.color;
+  // Dropdown
+  document.getElementById('ud-name').textContent=u.name;
+  document.getElementById('ud-role').textContent=u.role+' — '+u.title;
+  // Hide restricted nav items
+  document.querySelectorAll('.sb-item[data-page]').forEach(el=>{
+    const pg=el.dataset.page;
+    el.style.display=u.hidden.includes(pg)?'none':'';
+  });
+  // Hide system section if admin-restricted
+  const sysSec=document.querySelector('.sb-sys-sec');
+  const sysItems=document.querySelectorAll('.sb-sys-item');
+  if([...sysItems].every(i=>i.style.display==='none'))sysSec.style.display='none';
   addAudit('LOGIN','system',`${u.name} signed in as ${u.role}`);
   nav('dashboard');
 }
 
-// ═══════════════════════════════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════════════════════════════
-const PAGE_TITLES={
-  dashboard:'Dashboard',residents:'Residents',vitals:'Vitals Monitor',
-  emar:'eMAR',notes:'Shift Notes',labs:'Lab Reports',timeline:'Timeline',
-  careplan:'Care Plan',appointments:'Appointments',alerts:'Alerts',audit:'Audit Log'
-};
+// ===== NAVIGATION =====
+const PAGE_TITLES={dashboard:'Dashboard',residents:'Residents',alerts:'Alerts',vitals:'Vitals Monitor',emar:'eMAR',notes:'Shift Notes',labs:'Lab Reports',timeline:'Clinical Timeline',careplan:'Care Plan',appointments:'Appointments',audit:'Audit Log'};
 function nav(page){
   if(CURRENT_USER&&CURRENT_USER.hidden.includes(page)){toast('Access restricted for your role','error');return;}
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -1008,203 +1118,213 @@ function nav(page){
   if(el)el.classList.add('active');
   document.getElementById('tb-title').textContent=PAGE_TITLES[page]||page;
   document.querySelectorAll('.sb-item[data-page]').forEach(i=>i.classList.toggle('active',i.dataset.page===page));
-  const loaders={dashboard:loadDash,residents:loadResidents,vitals:()=>loadVitals(selectedVitalsId),emar:()=>loadEmar(selectedEmarId),notes:loadNotes,labs:()=>loadLabs(selectedLabsId),alerts:loadAlerts,timeline:()=>loadTimeline(selectedTlId),careplan:loadCarePlan,appointments:loadAppts,audit:loadAudit};
+  const loaders={dashboard:loadDash,residents:loadResidents,alerts:loadAlerts,vitals:()=>loadVitals(selVitals),emar:()=>loadEmar(selEmar),notes:loadNotes,labs:()=>loadLabs(selLabs),timeline:()=>loadTimeline(selTl),careplan:loadCarePlan,appointments:loadAppts,audit:loadAudit};
   if(loaders[page])loaders[page]();
-  closeSidebar();
-  window.scrollTo&&document.getElementById('main').scrollTo(0,0);
 }
-
-// ═══════════════════════════════════════════════════════════════
-// SIDEBAR
-// ═══════════════════════════════════════════════════════════════
-function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sb-overlay').classList.add('open');}
-function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sb-overlay').classList.remove('open');}
-function toggleUserDropdown(){document.getElementById('user-dropdown').classList.toggle('open');}
-function closeUserDropdown(){document.getElementById('user-dropdown').classList.remove('open');}
-function closeDropdownGoPage(p){closeUserDropdown();nav(p);}
+function toggleSidebar(){
+  sidebarCollapsed=!sidebarCollapsed;
+  document.getElementById('sidebar').classList.toggle('collapsed',sidebarCollapsed);
+}
+function toggleUD(){document.getElementById('ud-menu').classList.toggle('open');}
+function closeUD(){document.getElementById('ud-menu').classList.remove('open');}
 document.addEventListener('click',e=>{
-  const dd=document.getElementById('user-dropdown');
-  if(!dd.contains(e.target)&&!document.getElementById('tb-user-btn').contains(e.target))closeUserDropdown();
+  const m=document.getElementById('ud-menu');
+  const a=document.getElementById('tb-avatar');
+  if(m&&!m.contains(e.target)&&!a.contains(e.target))closeUD();
 });
 
-// ═══════════════════════════════════════════════════════════════
-// DASHBOARD
-// ═══════════════════════════════════════════════════════════════
-async function loadDash(){
-  let liveStats = null;
-  if (API_ONLINE) { try { liveStats = await apiFetch('/api/dashboard'); } catch(e){} }
-  loadDashInner(liveStats);
-}
-function loadDash_orig_unused(){
+// ===== DASHBOARD =====
+function loadDash(){
   const hrs=new Date().getHours();
   document.getElementById('dash-greeting').textContent=`Good ${hrs<12?'morning':hrs<17?'afternoon':'evening'}, ${CURRENT_USER.name.split(' ')[0]}`;
   document.getElementById('dash-date').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  const unacked=unackedAlerts();
-  document.getElementById('alert-badge').textContent=unacked.length;
-  const meds=MEDS_DB['R001']||[];let given=0,total=0;
-  meds.forEach(m=>{total+=m.times.length;given+=m.times.filter(t=>t.status==='given').length;});
-
+  const ua=unacked();
+  document.getElementById('sb-alert-badge').textContent=ua.length;
+  document.getElementById('tb-dot').style.display=ua.length?'':'none';
+  let given=0,total=0;
+  (medsData.R001||[]).forEach(m=>{total+=m.times.length;given+=m.times.filter(t=>t.status==='given').length;});
   document.getElementById('dash-stats').innerHTML=`
-    <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-val" style="color:var(--teal-d)">${liveStats?.total_residents||5}</div><div class="stat-lbl">Active Residents</div><div class="stat-sub">${API_ONLINE?'Live':'Local'}</div></div>
-    <div class="stat-card"><div class="stat-icon">🔔</div><div class="stat-val" style="color:var(--coral)">${unacked.length}</div><div class="stat-lbl">Pending Alerts</div><div class="stat-sub">${unacked.filter(a=>a.sev==='critical').length} critical</div></div>
-    <div class="stat-card"><div class="stat-icon">💊</div><div class="stat-val" style="color:var(--amber)">${given}/${total}</div><div class="stat-lbl">Meds Given</div><div class="stat-sub">Today · R001</div></div>
-    <div class="stat-card"><div class="stat-icon">💓</div><div class="stat-val" style="color:var(--sky)">5</div><div class="stat-lbl">Vitals Today</div><div class="stat-sub">All checked</div></div>
-  `;
-  document.getElementById('dash-alerts').innerHTML=unacked.slice(0,3).map(a=>`
+    <div class="stat-card" onclick="nav('residents')">
+      <span class="stat-ico">👥</span>
+      <div class="stat-val" style="color:var(--teal-d)">${RESIDENTS.length}</div>
+      <div class="stat-lbl">Active Residents</div>
+      <div class="stat-sub">All facilities</div>
+    </div>
+    <div class="stat-card" onclick="nav('alerts')">
+      <span class="stat-ico">🔔</span>
+      <div class="stat-val" style="color:var(--coral)">${ua.length}</div>
+      <div class="stat-lbl">Pending Alerts</div>
+      <div class="stat-sub">${ua.filter(a=>a.sev==='critical').length} critical</div>
+    </div>
+    <div class="stat-card" onclick="nav('emar')">
+      <span class="stat-ico">💊</span>
+      <div class="stat-val" style="color:var(--amber)">${given}/${total}</div>
+      <div class="stat-lbl">Meds Given</div>
+      <div class="stat-sub">Today · Ramesh Iyer</div>
+    </div>
+    <div class="stat-card" onclick="nav('vitals')">
+      <span class="stat-ico">💓</span>
+      <div class="stat-val" style="color:var(--sky)">5</div>
+      <div class="stat-lbl">Vitals Recorded</div>
+      <div class="stat-sub">All residents</div>
+    </div>`;
+  document.getElementById('dash-alerts').innerHTML=ua.slice(0,3).map(a=>`
     <div class="alert-row alert-${a.sev==='critical'?'critical':a.sev==='warning'?'warning':'info'}">
-      <div class="alert-icon">${a.sev==='critical'?'🚨':a.sev==='warning'?'⚠️':'ℹ️'}</div>
+      <div class="alert-ico">${a.sev==='critical'?'🚨':a.sev==='warning'?'⚠️':'ℹ️'}</div>
       <div class="alert-body">
         <div class="alert-title">${a.res} · ${a.room}</div>
         <div class="alert-msg">${a.msg}</div>
         <div class="alert-time">${fmt(a.t)}</div>
       </div>
       <button class="ack-btn" onclick="ackAlert('${a.id}');loadDash()">ACK</button>
-    </div>`).join('')||`<div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-text">No active alerts</div></div>`;
-
+    </div>`).join('')||`<div class="empty-state"><span class="empty-ico">✅</span><div class="empty-txt">No active alerts</div></div>`;
   document.getElementById('dash-residents').innerHTML=RESIDENTS.map(r=>`
-    <div class="r-row" onclick="nav('residents');setTimeout(()=>viewResident('${r.id}'),100)">
+    <div class="r-row" onclick="nav('residents');setTimeout(()=>viewRes('${r.id}'),80)">
       <div class="r-av" style="background:${r.color}">${r.initials}</div>
-      <div style="flex:1"><div class="r-name">${r.name}</div><div class="r-meta">Room ${r.room} · Age ${r.age}</div></div>
-      ${condBadge(r.condition)}<div class="r-chevron">›</div>
+      <div style="flex:1">
+        <div class="r-name">${r.name}</div>
+        <div class="r-meta">Room ${r.room} · Age ${r.age}</div>
+      </div>
+      ${condBadge(r.condition)}<span class="r-chevron">›</span>
     </div>`).join('');
-
-  document.getElementById('dash-meds').innerHTML=['R001·Ramesh','R002·Saraswati','R003·Govind','R004·Lakshmi','R005·Mohan'].map((s,i)=>{
-    const parts=s.split('·');const pct=[80,66,100,66,66][i];const cl=pct===100?'var(--green)':'var(--amber)';
-    const val=['4/5','2/3','1/1','2/3','2/3'][i];
-    return `<div class="chart-row"><div class="chart-lbl">${parts[1]}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${cl}"></div></div><div class="chart-val" style="color:${cl}">${val}</div></div>`;
-  }).join('');
+  const names=['Ramesh','Saraswati','Govind','Lakshmi','Mohan'];
+  const pcts=[80,67,100,67,67];const vals=['4/5','2/3','1/1','2/3','2/3'];
+  document.getElementById('dash-meds').innerHTML=names.map((n,i)=>`
+    <div class="chart-row">
+      <div class="chart-lbl">${n}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pcts[i]}%;background:${pcts[i]===100?'var(--green)':'var(--amber)'}"></div></div>
+      <div class="chart-val" style="color:${pcts[i]===100?'var(--green)':'var(--amber)'}">${vals[i]}</div>
+    </div>`).join('');
   addAudit('VIEW','dashboard','Dashboard loaded');
 }
 
-// ═══════════════════════════════════════════════════════════════
-// RESIDENTS
-// ═══════════════════════════════════════════════════════════════
-let resFilter='All';
-function filterResidents(f,el){
-  resFilter=f;
-  document.querySelectorAll('.cond-pill').forEach(p=>p.classList.remove('active'));
-  if(el)el.classList.add('active');
-  renderResidentList();
-}
+// ===== RESIDENTS =====
 function loadResidents(){
-  document.getElementById('resident-detail-view').style.display='none';
-  document.getElementById('residents-list').style.display='block';
-  renderResidentList();
+  document.getElementById('res-detail').style.display='none';
+  document.getElementById('res-list-view').style.display='';
+  renderResList();
 }
-function renderResidentList(){
+function filterRes(f,el){
+  resFilter=f;
+  document.querySelectorAll('#cond-filters button').forEach(b=>{b.className='btn btn-outline btn-sm';});
+  el.className='btn btn-primary btn-sm';
+  renderResList();
+}
+function renderResList(){
   const filtered=resFilter==='All'?RESIDENTS:RESIDENTS.filter(r=>r.condition===resFilter);
-  document.getElementById('residents-list').innerHTML=filtered.map(r=>{
-    const alert=unackedAlerts().find(a=>a.res===r.name);
-    return `<div class="card" style="padding:14px;margin-bottom:10px" onclick="viewResident('${r.id}')">
+  document.getElementById('res-list').innerHTML=filtered.map(r=>`
+    <div class="card" style="cursor:pointer" onclick="viewRes('${r.id}')">
       <div style="display:flex;align-items:center;gap:12px">
-        <div class="r-av" style="background:${r.color}">${r.initials}</div>
+        <div class="r-av" style="background:${r.color};width:50px;height:50px;border-radius:14px;font-size:15px">${r.initials}</div>
         <div style="flex:1">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <span style="font-size:15px;font-weight:800;color:var(--gray800)">${r.name}</span>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+            <span style="font-size:16px;font-weight:900;color:var(--g800)">${r.name}</span>
             ${condBadge(r.condition)}
-            ${alert?`<span class="badge badge-critical">⚠ Alert</span>`:''}
+            ${unacked().find(a=>a.res===r.name)?'<span class="badge badge-critical">⚠ Alert</span>':''}
           </div>
-          <div style="font-size:12px;color:var(--gray500);margin-top:4px">Room ${r.room} · Age ${r.age} · ${r.blood}</div>
-          <div style="font-size:11px;color:var(--gray400);margin-top:2px">${r.diagnoses[0]}${r.diagnoses.length>1?` +${r.diagnoses.length-1} more`:''}</div>
+          <div style="font-size:12px;color:var(--g500)">Room ${r.room} · Age ${r.age} · ${r.blood}</div>
+          <div style="font-size:11px;color:var(--g400);margin-top:3px">${r.diagnoses[0]}${r.diagnoses.length>1?` +${r.diagnoses.length-1} more`:''}</div>
         </div>
-        <div style="font-size:20px;color:var(--gray300)">›</div>
+        <span style="font-size:22px;color:var(--g300)">›</span>
       </div>
-    </div>`;}).join('');
-  if(!filtered.length)document.getElementById('residents-list').innerHTML=`<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-text">No residents match this filter</div></div>`;
+    </div>`).join('')||`<div class="empty-state"><span class="empty-ico">🔍</span><div class="empty-txt">No residents match filter</div></div>`;
 }
-function viewResident(id){
-  selectedResId=id;
+function viewRes(id){
   const r=RESIDENTS.find(x=>x.id===id);
   const v=(vitalsData[id]||[])[0]||{};
-  document.getElementById('residents-list').style.display='none';
-  const dv=document.getElementById('resident-detail-view');
-  dv.style.display='block';
-  const pendingA=unackedAlerts().filter(a=>a.res===r.name).length;
+  document.getElementById('res-list-view').style.display='none';
+  const dv=document.getElementById('res-detail');dv.style.display='';
+  const pa=unacked().filter(a=>a.res===r.name).length;
   dv.innerHTML=`
     <button class="btn btn-outline btn-sm" onclick="loadResidents()" style="margin-bottom:14px">← Back to list</button>
     <div class="res-detail-hdr">
-      <div class="res-detail-av" style="background:${r.color}">${r.initials}</div>
-      <div style="flex:1">
+      <div class="res-detail-av">${r.initials}</div>
+      <div>
         <div class="res-detail-name">${r.name}</div>
         <div class="res-detail-meta">Room ${r.room} · Age ${r.age} · ${r.blood} · Admitted ${r.admitted}</div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
-          ${condBadge(r.condition)}
-          ${pendingA?`<span class="badge badge-critical">⚠ ${pendingA} Alert${pendingA>1?'s':''}</span>`:''}
-        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${condBadge(r.condition)}${pa?`<span class="badge badge-critical">⚠ ${pa} Alert${pa>1?'s':''}</span>`:''}</div>
       </div>
     </div>
-    <div class="res-action-btns">
-      <button class="btn btn-outline btn-sm" onclick="nav('vitals');setTimeout(()=>switchRes('vitals','${id}'),120)">💓 Vitals</button>
-      <button class="btn btn-outline btn-sm" onclick="nav('emar');setTimeout(()=>switchRes('emar','${id}'),120)">💊 eMAR</button>
-      ${!CURRENT_USER.hidden.includes('labs')?`<button class="btn btn-outline btn-sm" onclick="nav('labs');setTimeout(()=>switchRes('labs','${id}'),120)">🔬 Labs</button>`:''}
-      <button class="btn btn-outline btn-sm" onclick="nav('timeline');setTimeout(()=>switchRes('timeline','${id}'),120)">📈 Timeline</button>
+    <div class="res-actions">
+      <button class="btn btn-outline btn-sm" onclick="selVitals='${id}';nav('vitals')">💓 Vitals</button>
+      <button class="btn btn-outline btn-sm" onclick="selEmar='${id}';nav('emar')">💊 eMAR</button>
+      ${!CURRENT_USER.hidden.includes('labs')?`<button class="btn btn-outline btn-sm" onclick="selLabs='${id}';nav('labs')">🔬 Labs</button>`:''}
+      <button class="btn btn-outline btn-sm" onclick="selTl='${id}';nav('timeline')">📈 Timeline</button>
     </div>
     <div class="card">
-      <div class="card-title">Clinical</div>
-      <div class="info-row"><div class="info-lbl">Attending Doctor</div><div class="info-val">🩺 ${r.doctor}</div></div>
-      <div class="info-row"><div class="info-lbl">Primary Caregiver</div><div class="info-val">🤲 ${r.caregiver}</div></div>
-      <div class="info-row"><div class="info-lbl">Diagnoses</div><div class="pill-wrap">${r.diagnoses.map(d=>`<span class="pill">${d}</span>`).join('')}</div></div>
-      <div class="info-row"><div class="info-lbl">Allergies</div><div class="pill-wrap">${r.allergies.map(a=>`<span class="allergy-pill">⚠ ${a.drug} (${a.severity})</span>`).join('')}</div></div>
+      <div class="card-ttl" style="margin-bottom:12px">🏥 Clinical Info</div>
+      <div class="info-row"><div class="info-lbl">Attending Doctor</div><div class="info-val">👨‍⚕️ ${r.doctor}</div></div>
+      <div class="info-row"><div class="info-lbl">Primary Caregiver</div><div class="info-val">🤝 ${r.caregiver}</div></div>
+      <div class="info-row"><div class="info-lbl">Diagnoses</div><div><div class="pill-wrap">${r.diagnoses.map(d=>`<span class="pill">${d}</span>`).join('')}</div></div></div>
+      <div class="info-row"><div class="info-lbl">Allergies</div><div><div class="pill-wrap">${r.allergies.map(a=>`<span class="pill pill-allergy">⚠ ${a.drug} (${a.severity})</span>`).join('')}</div></div></div>
     </div>
     ${v.bp_s?`<div class="card">
-      <div class="card-title">Latest Vitals · ${fmt(v.t)}</div>
+      <div class="card-ttl" style="margin-bottom:12px">💓 Latest Vitals · ${fmt(v.t)}</div>
       <div class="vitals-grid">
         <div class="vital-box"><div class="vital-lbl">Blood Pressure</div><div class="vital-val ${v.bp_s>=140?'vital-warn':'vital-ok'}">${v.bp_s}/${v.bp_d}</div><div class="vital-unit">mmHg</div></div>
-        <div class="vital-box"><div class="vital-lbl">Pulse</div><div class="vital-val ${v.pulse>100||v.pulse<50?'vital-warn':'vital-ok'}">${v.pulse}</div><div class="vital-unit">bpm</div></div>
+        <div class="vital-box"><div class="vital-lbl">Pulse</div><div class="vital-val ${v.pulse>100?'vital-warn':'vital-ok'}">${v.pulse}</div><div class="vital-unit">bpm</div></div>
         <div class="vital-box"><div class="vital-lbl">SpO₂</div><div class="vital-val ${v.spo2<94?'vital-crit':v.spo2<96?'vital-warn':'vital-ok'}">${v.spo2}%</div><div class="vital-unit">Oxygen</div></div>
         ${v.glucose?`<div class="vital-box"><div class="vital-lbl">Glucose</div><div class="vital-val ${v.glucose>150?'vital-warn':'vital-ok'}">${v.glucose}</div><div class="vital-unit">mg/dL</div></div>`:''}
-        ${v.weight?`<div class="vital-box"><div class="vital-lbl">Weight</div><div class="vital-val vital-ok">${v.weight}</div><div class="vital-unit">kg</div></div>`:''}
-        <div class="vital-box"><div class="vital-lbl">Temp</div><div class="vital-val ${v.temp>37.5?'vital-warn':'vital-ok'}">${v.temp}°C</div><div class="vital-unit">Celsius</div></div>
+        ${v.temp?`<div class="vital-box"><div class="vital-lbl">Temp</div><div class="vital-val ${v.temp>37.5?'vital-warn':'vital-ok'}">${v.temp}°C</div><div class="vital-unit">Celsius</div></div>`:''}
+        ${v.weight?`<div class="vital-box"><div class="vital-lbl">Weight</div><div class="vital-val vital-ok">${v.weight} kg</div><div class="vital-unit">Body weight</div></div>`:''}
       </div>
     </div>`:''}
     <div class="card">
-      <div class="card-title">Emergency Contact</div>
+      <div class="card-ttl" style="margin-bottom:12px">📞 Emergency Contact</div>
       <div class="info-row"><div class="info-lbl">Name</div><div class="info-val">👤 ${r.emergency.name} (${r.emergency.relation})</div></div>
-      <div class="info-row"><div class="info-lbl">Phone</div><div class="info-val">📞 ${r.emergency.phone}</div></div>
+      <div class="info-row"><div class="info-lbl">Phone</div><div class="info-val">📱 ${r.emergency.phone}</div></div>
     </div>`;
   addAudit('VIEW','residents',r.name);
 }
-function switchRes(page,id){if(page==='vitals'){selectedVitalsId=id;loadVitals(id);}else if(page==='emar'){selectedEmarId=id;loadEmar(id);}else if(page==='labs'){selectedLabsId=id;loadLabs(id);}else if(page==='timeline'){selectedTlId=id;loadTimeline(id);}}
 
-// ═══════════════════════════════════════════════════════════════
-// RESIDENT MINI-SELECTOR (for vitals/emar/labs/timeline)
-// ═══════════════════════════════════════════════════════════════
-function resSelectorHTML(selectedId, callback){
-  return RESIDENTS.map(r=>`
-    <div style="display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border-radius:10px;cursor:pointer;margin:3px;
-      background:${r.id===selectedId?'var(--teal-d)':'var(--gray100)'};
-      color:${r.id===selectedId?'#fff':'var(--gray600)'};font-size:12px;font-weight:700;"
-      onclick="${callback}('${r.id}')">
-      <div style="width:22px;height:22px;border-radius:50%;background:${r.id===selectedId?'rgba(255,255,255,0.25)':r.color};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff">${r.initials}</div>
-      ${r.name.split(' ')[0]}
-    </div>`).join('');
+// ===== ALERTS =====
+function loadAlerts(){
+  const ua=unacked();
+  document.getElementById('alerts-sub').textContent=`${ua.length} active · ${ALERTS.filter(a=>a.acked).length} acknowledged`;
+  document.getElementById('sb-alert-badge').textContent=ua.length;
+  document.getElementById('tb-dot').style.display=ua.length?'':'none';
+  document.getElementById('alerts-list').innerHTML=ALERTS.map(a=>`
+    <div class="alert-row alert-${a.sev==='critical'?'critical':a.sev==='warning'?'warning':'info'}" style="opacity:${a.acked?.55:1}">
+      <div class="alert-ico">${a.sev==='critical'?'🚨':a.sev==='warning'?'⚠️':'ℹ️'}</div>
+      <div class="alert-body">
+        <div class="alert-title">${a.res} · Room ${a.room}</div>
+        <div class="alert-msg">${a.msg}</div>
+        <div class="alert-time">${fmt(a.t)} · ${a.type.toUpperCase()}</div>
+      </div>
+      ${!a.acked?`<button class="ack-btn" onclick="ackAlert('${a.id}');loadAlerts()">ACK</button>`:`<span style="font-size:11px;color:var(--green);font-weight:800">✓ Acked</span>`}
+    </div>`).join('')||`<div class="empty-state"><span class="empty-ico">✅</span><div class="empty-txt">No alerts</div></div>`;
 }
+function ackAlert(id){
+  const a=ALERTS.find(x=>x.id===id);
+  if(a){a.acked=true;addAudit('UPDATE','alerts',`Acked: ${a.msg.slice(0,50)}`);}
+  document.getElementById('sb-alert-badge').textContent=unacked().length;
+  toast('Alert acknowledged');
+}
+function ackAll(){ALERTS.forEach(a=>a.acked=true);loadAlerts();toast('All alerts acknowledged');}
 
-// ═══════════════════════════════════════════════════════════════
-// VITALS
-// ═══════════════════════════════════════════════════════════════
+// ===== VITALS =====
 function loadVitals(id){
-  selectedVitalsId=id||'R001';
-  document.getElementById('vitals-res-list').innerHTML=resSelectorHTML(selectedVitalsId,'loadVitals');
-  const r=RESIDENTS.find(x=>x.id===selectedVitalsId);
-  const data=vitalsData[selectedVitalsId]||[];
+  selVitals=id||'R001';
+  document.getElementById('vitals-chips').innerHTML=resChipsHTML(selVitals,'loadVitals');
+  const r=RESIDENTS.find(x=>x.id===selVitals);
+  const data=vitalsData[selVitals]||[];
   const v=data[0]||{};
   const glData=data.filter(x=>x.glucose).slice(0,6).reverse();
   document.getElementById('vitals-content').innerHTML=`
     <div class="card">
-      <div class="card-title">💓 Current Vitals · ${r.name}</div>
+      <div class="card-hdr"><div class="card-ttl">💓 Current Vitals · ${r.name}</div><span style="font-size:12px;color:var(--g400)">${v.by?'By '+v.by:''}</span></div>
       ${v.bp_s?`<div class="vitals-grid">
-        <div class="vital-box"><div class="vital-lbl">Blood Pressure</div><div class="vital-val ${v.bp_s>=140?'vital-warn':'vital-ok'}">${v.bp_s}/${v.bp_d}</div><div class="vital-unit">mmHg · ${fmt(v.t)}</div></div>
+        <div class="vital-box"><div class="vital-lbl">Blood Pressure</div><div class="vital-val ${v.bp_s>=140?'vital-warn':'vital-ok'}">${v.bp_s}/${v.bp_d}</div><div class="vital-unit">mmHg</div></div>
         <div class="vital-box"><div class="vital-lbl">Pulse</div><div class="vital-val ${v.pulse>100?'vital-warn':'vital-ok'}">${v.pulse}</div><div class="vital-unit">bpm</div></div>
         <div class="vital-box"><div class="vital-lbl">SpO₂</div><div class="vital-val ${v.spo2<94?'vital-crit':v.spo2<96?'vital-warn':'vital-ok'}">${v.spo2}%</div><div class="vital-unit">Oxygen Sat</div></div>
         <div class="vital-box"><div class="vital-lbl">Temperature</div><div class="vital-val ${v.temp>37.5?'vital-warn':'vital-ok'}">${v.temp}°C</div><div class="vital-unit">Celsius</div></div>
         ${v.glucose?`<div class="vital-box"><div class="vital-lbl">Glucose</div><div class="vital-val ${v.glucose>150?'vital-warn':'vital-ok'}">${v.glucose}</div><div class="vital-unit">mg/dL</div></div>`:''}
         ${v.weight?`<div class="vital-box"><div class="vital-lbl">Weight</div><div class="vital-val vital-ok">${v.weight} kg</div><div class="vital-unit">Body weight</div></div>`:''}
-      </div>`:'<div class="empty-state"><div class="empty-state-icon">💓</div><div class="empty-state-text">No vitals recorded today</div></div>'}
-      ${v.by?`<div style="font-size:11px;color:var(--gray400);margin-top:8px">Recorded by ${v.by} · ${v.notes}</div>`:''}
+      </div><div style="font-size:11px;color:var(--g400);margin-top:8px">${v.notes||''}</div>`
+      :`<div class="empty-state"><span class="empty-ico">💓</span><div class="empty-txt">No vitals recorded today</div></div>`}
     </div>
     ${glData.length?`<div class="card">
-      <div class="card-title">📈 Glucose Trend</div>
+      <div class="card-hdr"><div class="card-ttl">📈 Glucose Trend</div></div>
       ${glData.map(x=>`<div class="chart-row">
         <div class="chart-lbl">${fmt(x.t).split(' ').slice(0,2).join(' ')}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${Math.min((x.glucose/200)*100,100)}%;background:${x.glucose>150?'var(--amber)':'var(--teal)'}"></div></div>
@@ -1212,23 +1332,22 @@ function loadVitals(id){
       </div>`).join('')}
     </div>`:''}
     <div class="card">
-      <div class="card-title">📋 Vitals History</div>
+      <div class="card-hdr"><div class="card-ttl">📋 Vitals History</div></div>
       <div class="tbl-wrap"><table>
         <thead><tr><th>Date/Time</th><th>BP</th><th>Pulse</th><th>SpO₂</th><th>Temp</th><th>Glucose</th><th>By</th></tr></thead>
         <tbody>${data.map(x=>`<tr>
-          <td style="font-size:11px;color:var(--gray500)">${fmt(x.t)}</td>
-          <td style="font-weight:700;color:${x.bp_s>=140?'var(--amber)':'var(--gray800)'}">${x.bp_s}/${x.bp_d}</td>
+          <td style="font-family:var(--mono);font-size:11px">${fmt(x.t)}</td>
+          <td style="font-weight:800;color:${x.bp_s>=140?'var(--amber)':'var(--g700)'}">${x.bp_s}/${x.bp_d}</td>
           <td>${x.pulse}</td>
-          <td style="color:${x.spo2<94?'var(--coral)':'var(--green)'}">${x.spo2}%</td>
+          <td style="color:${x.spo2<94?'var(--coral)':'var(--green)'}"><strong>${x.spo2}%</strong></td>
           <td>${x.temp}°C</td>
-          <td style="color:${x.glucose&&x.glucose>150?'var(--amber)':'var(--gray700)'}">${x.glucose||'—'}</td>
-          <td style="font-size:11px;color:var(--gray400)">${x.by}</td>
+          <td style="color:${x.glucose&&x.glucose>150?'var(--amber)':'var(--g700)'}">${x.glucose||'—'}</td>
+          <td style="font-size:11px;color:var(--g400)">${x.by}</td>
         </tr>`).join('')}</tbody>
       </table></div>
     </div>`;
   addAudit('VIEW','vitals',r.name);
 }
-function toggleVitalsForm(){const f=document.getElementById('vitals-form');f.classList.toggle('visible');}
 function saveVitals(){
   const bp=document.getElementById('v-bp').value;
   const pulse=parseInt(document.getElementById('v-pulse').value);
@@ -1240,86 +1359,84 @@ function saveVitals(){
   if(!bp||!pulse){toast('BP and pulse are required','error');return;}
   const[s,d]=bp.split('/').map(Number);
   const nv={t:new Date().toISOString(),bp_s:s,bp_d:d,pulse,spo2:spo2||null,temp:temp||null,glucose:glucose||null,weight:weight||null,by:CURRENT_USER.name,notes};
-  if(!vitalsData[selectedVitalsId])vitalsData[selectedVitalsId]=[];
-  vitalsData[selectedVitalsId].unshift(nv);
-  let triggered=0;
-  const r=RESIDENTS.find(x=>x.id===selectedVitalsId);
+  if(!vitalsData[selVitals])vitalsData[selVitals]=[];
+  vitalsData[selVitals].unshift(nv);
+  let triggered=0;const r=RESIDENTS.find(x=>x.id===selVitals);
   if(s>=160){ALERTS.unshift({id:'A'+Date.now(),res:r.name,room:r.room,type:'vital',sev:'critical',msg:`BP ${bp} — CRITICAL hypertension`,acked:false,t:new Date().toISOString()});triggered++;}
   else if(s>=140){ALERTS.unshift({id:'A'+Date.now(),res:r.name,room:r.room,type:'vital',sev:'warning',msg:`BP ${bp} — elevated`,acked:false,t:new Date().toISOString()});triggered++;}
   if(glucose>=200){ALERTS.unshift({id:'A'+Date.now(),res:r.name,room:r.room,type:'vital',sev:'critical',msg:`Glucose ${glucose} mg/dL — critical`,acked:false,t:new Date().toISOString()});triggered++;}
-  document.getElementById('alert-badge').textContent=unackedAlerts().length;
-  addAudit('CREATE','vitals',`Recorded for ${r.name}`);
-  document.getElementById('vitals-form').classList.remove('visible');
+  document.getElementById('vform').classList.remove('open');
   ['v-bp','v-pulse','v-spo2','v-temp','v-glucose','v-weight','v-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  loadVitals(selectedVitalsId);
+  loadVitals(selVitals);
   toast(triggered?`Vitals saved · ${triggered} alert(s) triggered`:'Vitals saved successfully',triggered?'warning':'success');
+  addAudit('CREATE','vitals',`Recorded for ${r.name}`);
 }
 
-// ═══════════════════════════════════════════════════════════════
-// eMAR
-// ═══════════════════════════════════════════════════════════════
+// ===== eMAR =====
 function loadEmar(id){
-  selectedEmarId=id||'R001';
-  document.getElementById('emar-res-list').innerHTML=resSelectorHTML(selectedEmarId,'loadEmar');
-  const r=RESIDENTS.find(x=>x.id===selectedEmarId);
-  const meds=MEDS_DB[selectedEmarId]||[];
+  selEmar=id||'R001';
+  document.getElementById('emar-chips').innerHTML=resChipsHTML(selEmar,'loadEmar');
+  const r=RESIDENTS.find(x=>x.id===selEmar);
+  const meds=medsData[selEmar]||[];
   let given=0,total=0;
   meds.forEach(m=>{total+=m.times.length;given+=m.times.filter(t=>t.status==='given').length;});
   const alg=r.allergies.map(a=>a.drug.toLowerCase());
   document.getElementById('emar-content').innerHTML=`
-    ${r.allergies.length?`<div class="alert-row alert-critical" style="margin-bottom:12px">
-      <div class="alert-icon">🚨</div>
-      <div class="alert-body"><div class="alert-title">Allergy Alert</div><div class="alert-msg">${r.allergies.map(a=>`${a.drug} (${a.severity})`).join(' · ')}</div></div>
+    ${r.allergies.length?`<div class="alert-row alert-critical" style="margin-bottom:14px">
+      <div class="alert-ico">🚨</div>
+      <div class="alert-body">
+        <div class="alert-title">Allergy Alert — ${r.name}</div>
+        <div class="alert-msg">${r.allergies.map(a=>`${a.drug} (${a.severity})`).join(' · ')}</div>
+      </div>
     </div>`:''}
     <div class="card">
-      <div class="card-header">
-        <div class="card-title">💊 ${r.name} · eMAR</div>
-        <div style="font-size:13px;color:var(--gray500)"><strong style="color:${given===total?'var(--green)':'var(--amber)'}">${given}</strong> / ${total} given</div>
+      <div class="card-hdr">
+        <div class="card-ttl">💊 ${r.name} · Medication Schedule</div>
+        <div style="font-size:13px;font-weight:800;color:${given===total?'var(--green)':'var(--amber)'}">${given}/${total} given</div>
       </div>
-      <div>${meds.map(m=>{
-        const conflict=alg.some(a=>m.name.toLowerCase().includes(a));
-        return `<div class="med-row">
-          <div class="med-name">${m.name} ${conflict?'<span style="color:var(--coral);font-size:10px;font-weight:700">⚠ ALLERGY RISK</span>':''}</div>
-          <div class="med-detail">${m.route} · ${m.freq} · ${m.indication}</div>
-          <div class="med-detail" style="margin-top:2px">Prescribed by ${m.by}</div>
-          <div class="med-chips">${m.times.map(dose=>`
-            <span class="dose-chip ${dose.status}" onclick="adminDose('${selectedEmarId}','${m.id}','${dose.id}',this,'${dose.status}')">
-              ${dose.status==='given'?'✓':dose.status==='overdue'?'⚠':'⏳'} ${dose.t}
-            </span>`).join('')}
-          </div>
-        </div>`;}).join('')}
+      <div class="prog-bar"><div class="prog-fill" style="width:${total?Math.round(given/total*100):0}%;background:${given===total?'var(--green)':'var(--amber)'}"></div></div>
+      <div style="margin-top:14px">
+        ${meds.map(m=>{
+          const conflict=alg.some(a=>m.name.toLowerCase().includes(a));
+          return`<div class="med-row">
+            <div class="med-name">${m.name}${conflict?` <span style="color:var(--coral);font-size:10px;font-weight:900">⚠ ALLERGY RISK</span>`:''}</div>
+            <div class="med-detail">${m.route} · ${m.freq} · ${m.indication}</div>
+            <div class="med-detail">Rx: ${m.by}</div>
+            <div class="med-chips">${m.times.map(dose=>`
+              <span class="dose-chip ${dose.status}" onclick="adminDose('${selEmar}','${m.id}','${dose.id}',this,'${dose.status}')">
+                ${dose.status==='given'?'✓ '+dose.t+' given':dose.status==='overdue'?'⚠ '+dose.t+' overdue':'⏰ '+dose.t+' pending'}
+              </span>`).join('')}
+            </div>
+          </div>`;
+        }).join('')}
+        ${!meds.length?`<div class="empty-state"><span class="empty-ico">💊</span><div class="empty-txt">No medications on file</div></div>`:''}
       </div>
     </div>`;
   addAudit('VIEW','emar',r.name);
 }
 function adminDose(resId,medId,doseId,el,status){
   if(status==='given')return;
-  const med=MEDS_DB[resId].find(m=>m.id===medId);
+  const med=medsData[resId].find(m=>m.id===medId);
   const dose=med.times.find(t=>t.id===doseId);
   if(dose){dose.status='given';dose.adm=CURRENT_USER.name;}
-  el.className='dose-chip given';el.innerHTML='✓ '+el.textContent.trim().split(' ').pop();
-  let given=0,total=0;
-  (MEDS_DB[resId]||[]).forEach(m=>{total+=m.times.length;given+=m.times.filter(t=>t.status==='given').length;});
+  el.className='dose-chip given';el.textContent='✓ '+dose.t+' given';
   addAudit('UPDATE','emar',`${med.name} administered for ${RESIDENTS.find(r=>r.id===resId).name}`);
   toast('Dose recorded — eMAR updated');
 }
 
-// ═══════════════════════════════════════════════════════════════
-// SHIFT NOTES
-// ═══════════════════════════════════════════════════════════════
+// ===== NOTES =====
 function loadNotes(){
   const data=notesData['R001']||[];
   document.getElementById('notes-list').innerHTML=data.map(n=>`
     <div class="note-card ${n.role==='Doctor'?'doctor':''}">
       <div class="note-meta">
-        <div><div class="note-author">${n.author} <span class="note-role">(${n.role})</span></div><div style="font-size:11px;color:var(--teal-d);font-weight:600;margin-top:2px">${n.shift} shift</div></div>
+        <div><div class="note-author">${n.author} <span class="note-role">(${n.role})</span></div><div style="font-size:10px;color:var(--teal-d);font-weight:700;margin-top:2px">${n.shift} Shift</div></div>
         <div class="note-time">${fmt(n.t)}</div>
       </div>
       <div class="note-body">${n.note}</div>
-      ${n.tasks&&n.tasks.length?`<div class="note-tasks">⏳ ${n.tasks.map(t=>`<span class="task-chip">${t}</span>`).join('')}</div>`:''}`
-  ).join('')||`<div class="empty-state"><div class="empty-state-icon">📝</div><div class="empty-state-text">No notes yet</div></div>`;
+      ${n.tasks&&n.tasks.length?`<div class="note-tasks">⏰ ${n.tasks.map(t=>`<span class="task-chip">${t}</span>`).join('')}</div>`:''}
+    </div>`).join('')||`<div class="empty-state"><span class="empty-ico">📝</span><div class="empty-txt">No notes yet</div></div>`;
 }
-function toggleNoteForm(){document.getElementById('note-form').classList.toggle('visible');}
 function saveNote(){
   const note=document.getElementById('n-note').value.trim();
   if(!note){toast('Please enter a note','error');return;}
@@ -1329,41 +1446,42 @@ function saveNote(){
   notesData['R001'].unshift(nn);
   addAudit('CREATE','shift_notes',`${nn.shift} note by ${nn.author}`);
   document.getElementById('n-note').value='';document.getElementById('n-tasks').value='';
-  document.getElementById('note-form').classList.remove('visible');
+  document.getElementById('nform').classList.remove('open');
   loadNotes();toast('Shift note saved');
 }
 
-// ═══════════════════════════════════════════════════════════════
-// LAB REPORTS
-// ═══════════════════════════════════════════════════════════════
+// ===== LABS =====
 function loadLabs(id){
-  selectedLabsId=id||'R001';
-  document.getElementById('labs-res-list').innerHTML=resSelectorHTML(selectedLabsId,'loadLabs');
-  const r=RESIDENTS.find(x=>x.id===selectedLabsId);
-  const data=labsData[selectedLabsId]||[];
+  selLabs=id||'R001';
+  document.getElementById('labs-chips').innerHTML=resChipsHTML(selLabs,'loadLabs');
+  const r=RESIDENTS.find(x=>x.id===selLabs);
+  const data=labsData[selLabs]||[];
   const abnormal=data.filter(l=>l.status!=='normal');
   document.getElementById('labs-content').innerHTML=`
-    ${abnormal.length?`<div class="alert-row alert-warning" style="margin-bottom:12px">
-      <div class="alert-icon">⚠️</div>
-      <div class="alert-body"><div class="alert-title">${abnormal.length} Abnormal Result${abnormal.length>1?'s':''}</div><div class="alert-msg">${abnormal.map(l=>`${l.test}: ${l.result} ${l.unit}`).join(' · ')}</div></div>
+    ${abnormal.length?`<div class="alert-row alert-warning" style="margin-bottom:14px">
+      <div class="alert-ico">⚠️</div>
+      <div class="alert-body">
+        <div class="alert-title">${abnormal.length} Abnormal Result${abnormal.length>1?'s':''}</div>
+        <div class="alert-msg">${abnormal.map(l=>`${l.test}: ${l.result} ${l.unit}`).join(' · ')}</div>
+      </div>
     </div>`:''}
     <div class="card">
-      <div class="card-header">
-        <div class="card-title">🔬 ${r.name} · Labs</div>
-        ${CURRENT_USER.role==='Doctor'?`<button class="btn btn-outline btn-sm" onclick="toggleLabForm()">＋ Add</button>`:''}
+      <div class="card-hdr">
+        <div class="card-ttl">🔬 ${r.name} · Lab Results</div>
+        ${CURRENT_USER.role==='Doctor'?`<button class="btn btn-outline btn-sm" onclick="toggleForm('lform')">+ Add</button>`:''}
       </div>
-      <div class="form-box" id="lab-form">
-        <div class="form-2col">
+      <div class="form-section" id="lform">
+        <div class="form-grid">
           <div class="form-group"><label>Test Name</label><input id="lab-test" placeholder="HbA1c"/></div>
           <div class="form-group"><label>Result</label><input id="lab-result" placeholder="7.8"/></div>
           <div class="form-group"><label>Unit</label><input id="lab-unit" placeholder="%"/></div>
           <div class="form-group"><label>Reference Range</label><input id="lab-ref" placeholder="< 7.0"/></div>
           <div class="form-group"><label>Status</label><select id="lab-status"><option>normal</option><option>high</option><option>low</option></select></div>
-          <div class="form-group"><label>Date</label><input id="lab-date" type="date" value="2026-04-01"/></div>
+          <div class="form-group"><label>Date</label><input id="lab-date" type="date" value="2026-04-06"/></div>
         </div>
-        <div style="display:flex;gap:8px">
+        <div class="form-actions">
           <button class="btn btn-primary" onclick="saveLabResult()">💾 Save</button>
-          <button class="btn btn-outline" onclick="toggleLabForm()">Cancel</button>
+          <button class="btn btn-outline" onclick="toggleForm('lform')">Cancel</button>
         </div>
       </div>
       ${data.map(l=>`<div class="lab-row">
@@ -1371,39 +1489,37 @@ function loadLabs(id){
         <div class="lab-val" style="color:${l.status==='high'?'var(--coral)':l.status==='low'?'var(--sky)':'var(--green)'}">${l.result} ${l.unit}</div>
         <div class="lab-ref">Ref: ${l.ref}</div>
         ${labBadge(l.status)}
-        <div style="font-size:10px;color:var(--gray400);margin-left:auto">${l.date}</div>
+        <div style="font-size:10px;color:var(--g400);margin-left:auto;font-family:var(--mono)">${l.date}</div>
       </div>`).join('')}
-      ${!data.length?`<div class="empty-state"><div class="empty-state-icon">🔬</div><div class="empty-state-text">No lab results on file</div></div>`:''}
+      ${!data.length?`<div class="empty-state"><span class="empty-ico">🔬</span><div class="empty-txt">No lab results on file</div></div>`:''}
     </div>`;
   addAudit('VIEW','labs',r.name);
 }
-function toggleLabForm(){document.getElementById('lab-form').classList.toggle('visible');}
 function saveLabResult(){
   if(CURRENT_USER.role!=='Doctor'){toast('Only Doctors can add lab results','error');return;}
   const test=document.getElementById('lab-test').value;const result=document.getElementById('lab-result').value;const status=document.getElementById('lab-status').value;
-  if(!test||!result){toast('Test name and result required','error');return;}
+  if(!test||!result){toast('Test name and result are required','error');return;}
   const nl={id:'L'+Date.now(),test,result,unit:document.getElementById('lab-unit').value,ref:document.getElementById('lab-ref').value,status,date:document.getElementById('lab-date').value,by:CURRENT_USER.name};
-  if(!labsData[selectedLabsId])labsData[selectedLabsId]=[];
-  labsData[selectedLabsId].unshift(nl);
-  if(status!=='normal'){const r=RESIDENTS.find(x=>x.id===selectedLabsId);ALERTS.unshift({id:'A'+Date.now(),res:r.name,room:r.room,type:'lab',sev:'warning',msg:`Lab: ${test} ${result} — ${status}`,acked:false,t:new Date().toISOString()});document.getElementById('alert-badge').textContent=unackedAlerts().length;}
-  addAudit('CREATE','labs',`${test} for ${RESIDENTS.find(r=>r.id===selectedLabsId).name}`);
-  loadLabs(selectedLabsId);toast('Lab result saved'+(status!=='normal'?' — alert triggered':''));
+  if(!labsData[selLabs])labsData[selLabs]=[];
+  labsData[selLabs].unshift(nl);
+  if(status!=='normal'){const r=RESIDENTS.find(x=>x.id===selLabs);ALERTS.unshift({id:'A'+Date.now(),res:r.name,room:r.room,type:'lab',sev:'warning',msg:`Lab: ${test} ${result} — ${status}`,acked:false,t:new Date().toISOString()});}
+  addAudit('CREATE','labs',`${test} for ${RESIDENTS.find(r=>r.id===selLabs).name}`);
+  loadLabs(selLabs);toast('Lab result saved'+(status!=='normal'?' — alert triggered':''));
 }
 
-// ═══════════════════════════════════════════════════════════════
-// TIMELINE
-// ═══════════════════════════════════════════════════════════════
+// ===== TIMELINE =====
 function loadTimeline(id){
-  selectedTlId=id||'R001';
-  document.getElementById('tl-res-list').innerHTML=resSelectorHTML(selectedTlId,'loadTimeline');
-  const r=RESIDENTS.find(x=>x.id===selectedTlId);
+  selTl=id||'R001';
+  document.getElementById('tl-chips').innerHTML=resChipsHTML(selTl,'loadTimeline');
+  const r=RESIDENTS.find(x=>x.id===selTl);
   const events=[];
-  (vitalsData[selectedTlId]||[]).forEach(v=>events.push({icon:'💓',t:v.t,title:'Vitals Recorded',body:`BP ${v.bp_s}/${v.bp_d} · Pulse ${v.pulse} · SpO₂ ${v.spo2}%${v.glucose?' · Glucose '+v.glucose+' mg/dL':''}`,color:'#00897B',by:v.by}));
-  (notesData[selectedTlId]||[]).forEach(n=>events.push({icon:n.role==='Doctor'?'🩺':'📝',t:n.t,title:`${n.role} Note — ${n.shift}`,body:n.note,color:n.role==='Doctor'?'#2E7D32':'#00897B',by:n.author}));
-  (labsData[selectedTlId]||[]).forEach(l=>events.push({icon:'🔬',t:l.date+'T12:00:00',title:`Lab: ${l.test}`,body:`${l.result} ${l.unit} (Ref: ${l.ref}) — ${l.status}`,color:l.status==='normal'?'#2E7D32':'#E53935',by:l.by}));
+  (vitalsData[selTl]||[]).forEach(v=>events.push({icon:'💓',t:v.t,title:'Vitals Recorded',body:`BP ${v.bp_s}/${v.bp_d} · Pulse ${v.pulse} · SpO₂ ${v.spo2}%${v.glucose?' · Glucose '+v.glucose+' mg/dL':''}`,color:'#00897B',by:v.by}));
+  (notesData[selTl]||[]).forEach(n=>events.push({icon:n.role==='Doctor'?'👨‍⚕️':'📝',t:n.t,title:`${n.role} Note — ${n.shift} Shift`,body:n.note,color:n.role==='Doctor'?'#2E7D32':'#00897B',by:n.author}));
+  (labsData[selTl]||[]).forEach(l=>events.push({icon:'🔬',t:l.date+'T12:00:00',title:`Lab: ${l.test}`,body:`${l.result} ${l.unit} (Ref: ${l.ref}) — ${l.status}`,color:l.status==='normal'?'#2E7D32':'#E53935',by:l.by}));
   events.sort((a,b)=>new Date(b.t)-new Date(a.t));
-  document.getElementById('timeline-content').innerHTML=`<div class="card"><div class="card-title">📈 Clinical Timeline · ${r.name}</div>
-    ${events.slice(0,15).map((e,i)=>`
+  document.getElementById('tl-content').innerHTML=`<div class="card">
+    <div class="card-hdr"><div class="card-ttl">📈 Clinical Timeline · ${r.name}</div><span style="font-size:12px;color:var(--g400)">${events.length} events</span></div>
+    ${events.slice(0,20).map((e,i)=>`
       <div class="tl-item">
         <div class="tl-left">
           <div class="tl-dot" style="background:${e.color}"></div>
@@ -1417,114 +1533,95 @@ function loadTimeline(id){
           <div class="tl-body">${e.body}</div>
         </div>
       </div>`).join('')}
-    ${!events.length?`<div class="empty-state"><div class="empty-state-icon">📈</div><div class="empty-state-text">No events recorded</div></div>`:''}
+    ${!events.length?`<div class="empty-state"><span class="empty-ico">📈</span><div class="empty-txt">No events recorded</div></div>`:''}
   </div>`;
   addAudit('VIEW','timeline',r.name);
 }
 
-// ═══════════════════════════════════════════════════════════════
-// ALERTS
-// ═══════════════════════════════════════════════════════════════
-function loadAlerts(){
-  const active=unackedAlerts();
-  document.getElementById('alerts-sub').textContent=`${active.length} active · ${ALERTS.filter(a=>a.acked).length} acknowledged`;
-  document.getElementById('alert-badge').textContent=active.length;
-  document.getElementById('alerts-list').innerHTML=ALERTS.map(a=>`
-    <div class="alert-row alert-${a.sev==='critical'?'critical':a.sev==='warning'?'warning':'info'}" style="opacity:${a.acked?.55:1}">
-      <div class="alert-icon">${a.sev==='critical'?'🚨':a.sev==='warning'?'⚠️':'ℹ️'}</div>
-      <div class="alert-body">
-        <div class="alert-title">${a.res} · Room ${a.room}</div>
-        <div class="alert-msg">${a.msg}</div>
-        <div class="alert-time">${fmt(a.t)} · ${a.type.toUpperCase()}</div>
-      </div>
-      ${!a.acked?`<button class="ack-btn" onclick="ackAlert('${a.id}');loadAlerts()">ACK</button>`:`<span style="font-size:11px;color:var(--green);font-weight:700">✓ Acked</span>`}
-    </div>`).join('')||`<div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-text">No alerts</div></div>`;
-}
-function ackAlert(id){
-  const a=ALERTS.find(x=>x.id===id);
-  if(a){a.acked=true;addAudit('UPDATE','alerts',`Acknowledged: ${a.msg.slice(0,50)}`);}
-  document.getElementById('alert-badge').textContent=unackedAlerts().length;
-  toast('Alert acknowledged');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// CARE PLAN
-// ═══════════════════════════════════════════════════════════════
+// ===== CARE PLAN =====
 function loadCarePlan(){
   const r=RESIDENTS.find(x=>x.id==='R001');
   document.getElementById('careplan-content').innerHTML=`
     <div class="card">
-      <div class="card-title">Goals</div>
-      ${['Reduce HbA1c below 7.0%','Maintain BP below 130/80 mmHg','Continue physiotherapy for arthritis','Monitor glucose twice daily'].map(g=>`
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--gray100)">
-          <span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span><span style="font-size:13px;color:var(--gray700)">${g}</span>
+      <div class="card-ttl" style="margin-bottom:12px">🎯 Treatment Goals</div>
+      ${['Reduce HbA1c below 7.0%','Maintain BP below 130/80 mmHg','Continue physiotherapy for arthritis 3× per week','Monitor glucose twice daily','Improve dietary compliance — low-carb, low-salt'].map(g=>`
+        <div class="goal-item">
+          <div class="goal-check">✓</div>
+          <span style="font-size:13px;color:var(--g700)">${g}</span>
         </div>`).join('')}
     </div>
-    <div class="card">
-      <div class="card-title">Dietary Orders</div>
-      <div style="font-size:13px;line-height:1.8;color:var(--gray700)">Low-carbohydrate diabetic diet. Avoid refined sugar and white rice. 1.5L fluid intake daily. High-fibre breakfast. Low-salt meals for BP management.</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-ttl" style="margin-bottom:10px">🥗 Dietary Orders</div>
+        <div style="font-size:13px;line-height:1.8;color:var(--g700)">Low-carbohydrate diabetic diet. Avoid refined sugar and white rice. 1.5L fluid intake daily. High-fibre breakfast. Low-salt meals for BP management.</div>
+      </div>
+      <div class="card">
+        <div class="card-ttl" style="margin-bottom:10px">🏃 Activity Orders</div>
+        <div style="font-size:13px;line-height:1.8;color:var(--g700)">Physiotherapy 3× per week — Mon, Wed, Fri. Daily 15-min walk post-lunch. Range-of-motion exercises for knees. No high-impact activity.</div>
+      </div>
     </div>
     <div class="card">
-      <div class="card-title">Activity Orders</div>
-      <div style="font-size:13px;line-height:1.8;color:var(--gray700)">Physiotherapy 3× per week — Mon, Wed, Fri. Daily 15-min walk post-lunch. Range-of-motion exercises for knees. No high-impact activity.</div>
+      <div class="card-ttl" style="margin-bottom:12px">🏥 Diagnoses & Allergies</div>
+      <div style="font-size:11px;font-weight:700;color:var(--g500);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:6px">Diagnoses</div>
+      <div class="pill-wrap" style="margin-bottom:12px">${r.diagnoses.map(d=>`<span class="pill">${d}</span>`).join('')}</div>
+      <div style="font-size:11px;font-weight:700;color:var(--g500);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:6px">Allergies</div>
+      <div class="pill-wrap">${r.allergies.map(a=>`<span class="pill pill-allergy">⚠ ${a.drug} (${a.severity})</span>`).join('')}</div>
     </div>
-    <div class="card">
-      <div class="card-title">Diagnoses &amp; Allergies</div>
-      <div class="sec-divider" style="margin-top:0">Diagnoses</div>
-      <div class="pill-wrap">${r.diagnoses.map(d=>`<span class="pill">${d}</span>`).join('')}</div>
-      <div class="sec-divider">Allergies</div>
-      <div class="pill-wrap">${r.allergies.map(a=>`<span class="allergy-pill">⚠ ${a.drug}</span>`).join('')}</div>
-    </div>
-    <div class="card">
-      <div class="card-title">Next Review</div>
-      <div style="font-size:18px;font-weight:800;color:var(--teal-d)">📅 15 April 2026</div>
-      <div style="font-size:13px;color:var(--gray500);margin-top:6px">Attending: Dr. Priya Nair</div>
+    <div class="card" style="background:linear-gradient(135deg,var(--teal-d),var(--teal));color:#fff;border:none">
+      <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.7);margin-bottom:4px">NEXT REVIEW</div>
+      <div style="font-size:22px;font-weight:900">📅 15 April 2026</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.75);margin-top:4px">Attending: Dr. Priya Nair · Room 204-A</div>
     </div>`;
 }
 
-// ═══════════════════════════════════════════════════════════════
-// APPOINTMENTS
-// ═══════════════════════════════════════════════════════════════
+// ===== APPOINTMENTS =====
 function loadAppts(){
   const apts=[
-    {type:'Doctor Review',with:'Dr. Priya Nair',date:'2026-04-04',time:'10:00',status:'upcoming'},
-    {type:'Physiotherapy',with:'Mr. Arjun Bhat',date:'2026-04-03',time:'09:00',status:'upcoming'},
-    {type:'Lab Panel',with:'CareCore Pathology',date:'2026-04-10',time:'08:00',status:'upcoming'},
-    {type:'Doctor Review',with:'Dr. Priya Nair',date:'2026-03-01',time:'11:00',status:'completed'},
+    {type:'Doctor Review',with:'Dr. Priya Nair',date:'2026-04-15',time:'10:00',status:'upcoming',icon:'👨‍⚕️'},
+    {type:'Physiotherapy',with:'Mr. Arjun Bhat',date:'2026-04-09',time:'09:00',status:'upcoming',icon:'🏃'},
+    {type:'Lab Panel',with:'CareCore Pathology',date:'2026-04-12',time:'08:00',status:'upcoming',icon:'🔬'},
+    {type:'Doctor Review',with:'Dr. Priya Nair',date:'2026-03-01',time:'11:00',status:'completed',icon:'👨‍⚕️'},
+    {type:'Physiotherapy',with:'Mr. Arjun Bhat',date:'2026-03-05',time:'09:00',status:'completed',icon:'🏃'},
   ];
-  document.getElementById('appt-content').innerHTML=`<div class="card">${apts.map(a=>`
-    <div class="r-row">
-      <div style="width:40px;height:40px;border-radius:12px;background:${a.status==='upcoming'?'var(--teal-xl)':'var(--gray100)'};display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📅</div>
+  document.getElementById('appt-content').innerHTML=`<div class="card">
+    ${apts.map(a=>`<div class="r-row">
+      <div style="width:44px;height:44px;border-radius:12px;background:${a.status==='upcoming'?'var(--teal-xl)':'var(--g100)'};display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${a.icon}</div>
       <div style="flex:1">
-        <div style="font-size:14px;font-weight:700;color:var(--gray800)">${a.type}</div>
-        <div style="font-size:12px;color:var(--gray500);margin-top:2px">${a.with} · ${a.date} at ${a.time}</div>
+        <div style="font-size:14px;font-weight:800;color:var(--g800)">${a.type}</div>
+        <div style="font-size:12px;color:var(--g500);margin-top:2px">${a.with} · ${a.date} at ${a.time}</div>
       </div>
-      <span class="badge ${a.status==='upcoming'?'badge-teal':'badge-normal'}">${a.status==='upcoming'?'Upcoming':'✓ Done'}</span>
-    </div>`).join('')}</div>`;
+      <span class="badge ${a.status==='upcoming'?'badge-teal':'badge-stable'}">${a.status==='upcoming'?'Upcoming':'✓ Done'}</span>
+    </div>`).join('')}
+  </div>`;
 }
 
-// ═══════════════════════════════════════════════════════════════
-// AUDIT
-// ═══════════════════════════════════════════════════════════════
+// ===== AUDIT =====
 function loadAudit(){
-  const initial=[
+  const seed=[
     {t:'21:30',name:'Dr. Priya Nair',role:'Doctor',action:'VIEW',resource:'dashboard',detail:'Dashboard loaded'},
     {t:'21:00',name:'Sunita Rao',role:'Caregiver',action:'CREATE',resource:'vitals',detail:'Recorded for Ramesh Iyer'},
-    {t:'08:15',name:'Sunita Rao',role:'Caregiver',action:'UPDATE',resource:'emar',detail:'Metformin 500mg marked given'},
+    {t:'20:15',name:'Sunita Rao',role:'Caregiver',action:'UPDATE',resource:'emar',detail:'Metformin 500mg marked given'},
     {t:'13:30',name:'Dr. Priya Nair',role:'Doctor',action:'VIEW',resource:'labs',detail:'Lab results reviewed'},
-    {t:'08:10',name:'Deepa Singh',role:'Caregiver',action:'CREATE',resource:'vitals',detail:'Recorded for Saraswati Menon'},
+    {t:'08:10',name:'Deepa Singh',role:'Nurse',action:'CREATE',resource:'vitals',detail:'Recorded for Saraswati Menon'},
+    {t:'08:05',name:'System',role:'Admin',action:'ALERT',resource:'alerts',detail:'BP alert generated for Saraswati Menon'},
   ];
-  const all=[...auditLog,...initial];
+  const all=[...auditLog,...seed];
   document.getElementById('audit-tbody').innerHTML=all.map(l=>`<tr>
-    <td style="font-size:11px;color:var(--gray500)">${l.t}</td>
-    <td style="font-weight:600">${l.name}</td>
-    <td><span class="badge badge-${l.role==='Doctor'?'teal':'normal'}">${l.role}</span></td>
-    <td><span class="badge badge-${l.action==='CREATE'?'high':l.action==='UPDATE'?'low':'normal'}">${l.action}</span></td>
-    <td style="color:var(--gray600)">${l.resource}</td>
-    <td style="font-size:11px;color:var(--gray400)">${l.detail}</td>
+    <td style="font-family:var(--mono);font-size:11px">${l.t}</td>
+    <td style="font-weight:700">${l.name}</td>
+    <td><span class="badge ${l.role==='Doctor'?'badge-teal':'badge-gray'}">${l.role}</span></td>
+    <td><span class="badge ${l.action==='CREATE'?'badge-stable':l.action==='UPDATE'?'badge-monitor':l.action==='ALERT'?'badge-critical':'badge-gray'}">${l.action}</span></td>
+    <td style="color:var(--g600)">${l.resource}</td>
+    <td style="font-size:11px;color:var(--g500)">${l.detail}</td>
   </tr>`).join('');
 }
+
+// ===== SEARCH =====
+function globalSearch(q){
+  if(!q.trim())return;
+  const match=RESIDENTS.find(r=>r.name.toLowerCase().includes(q.toLowerCase()));
+  if(match){nav('residents');setTimeout(()=>viewRes(match.id),100);}
+}
 </script>
-</div>
 </body>
 </html>
